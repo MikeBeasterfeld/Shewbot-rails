@@ -9,7 +9,7 @@ end
 execute "install nodejs" do
   command "aptitude install nodejs -y"
   ignore_failure false
-  creates '/usr/bin/curl'
+  creates '/usr/bin/node'
 end
 
 execute "install rvm" do
