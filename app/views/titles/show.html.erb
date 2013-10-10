@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @title.title %>
+</p>
+
+<p>
+  <b>Title lc:</b>
+  <%= @title.title_lc %>
+</p>
+
+<p>
+  <b>Created at:</b>
+  <%= @title.created_at %>
+</p>
+
+<p>
+  <b>Ircuser:</b>
+  <%= @title.ircuser_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_title_path(@title) %> |
+<%= link_to 'Back', titles_path %>
