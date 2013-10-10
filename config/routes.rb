@@ -1,4 +1,16 @@
 Shewbot::Application.routes.draw do
+  resources :votes
+
+
+  resources :titles
+
+
+  resources :shows
+
+
+  resources :irc_users
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
