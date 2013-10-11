@@ -7,8 +7,15 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<p>
+	<%= link_to "IRC Users", irc_users_path %>
+	<%= link_to "Titles", titles_path %>
+	<%= link_to "Votes", votes_path %>
+	<%= link_to "Shows", shows_path %>
+</p>
+
 
 <%= yield %>
 
-</body>
+</body
 </html>
