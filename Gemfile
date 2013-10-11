@@ -4,8 +4,9 @@ ruby "1.9.3"
 
 gem 'rails', '3.2.14'
 
-group :development do
+group :development, :test do
 	gem 'sqlite3'
+	gem 'rspec-rails'
 end
 
 group :assets do
@@ -16,6 +17,10 @@ group :assets do
 end
 
 gem 'jquery-rails'
+
+group :test do
+	gem 'capybara'
+end
 
 group :production do
 	gem 'pg'
