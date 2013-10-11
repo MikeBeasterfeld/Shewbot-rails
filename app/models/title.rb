@@ -1,7 +1,7 @@
 class Title < ActiveRecord::Base
-  attr_accessible :created_at, :irc_user_id, :show_id, :title, :title_lc
+  attr_accessible :created_at, :ircuser_id, :show_id, :title, :title_lc
 
-  validates :content, :length => { :maximum => 50 }
+  validates :title, :length => { :maximum => 50 }
 
   belongs_to :show
 

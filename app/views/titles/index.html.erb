@@ -6,6 +6,7 @@
     <th>Title lc</th>
     <th>Created at</th>
     <th>Ircuser</th>
+    <th>Show</th>
     <th></th>
     <th></th>
     <th></th>
@@ -17,6 +18,7 @@
     <td><%= title.title_lc %></td>
     <td><%= title.created_at %></td>
     <td><%= title.ircuser_id %></td>
+    <td><%= title.show_id %></td>
     <td><%= link_to 'Show', title %></td>
     <td><%= link_to 'Edit', edit_title_path(title) %></td>
     <td><%= link_to 'Destroy', title, method: :delete, data: { confirm: 'Are you sure?' } %></td>
