@@ -11,13 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131010200220) do
+ActiveRecord::Schema.define(:version => 20131012161224) do
 
   create_table "irc_users", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "irc_users", ["name"], :name => "index_irc_users_on_name", :unique => true
 
   create_table "shows", :force => true do |t|
     t.string   "title"
@@ -28,10 +30,11 @@ ActiveRecord::Schema.define(:version => 20131010200220) do
   create_table "titles", :force => true do |t|
     t.string   "title"
     t.string   "title_lc"
-    t.datetime "created_at", :null => false
-    t.integer  "ircuser_id"
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                 :null => false
+    t.integer  "irc_user_id"
+    t.datetime "updated_at",                 :null => false
     t.integer  "show_id"
+    t.integer  "votes_count", :default => 0
   end
 
   create_table "votes", :force => true do |t|

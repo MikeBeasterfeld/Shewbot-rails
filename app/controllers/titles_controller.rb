@@ -6,7 +6,7 @@ class TitlesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @titles }
+      format.json { render json: @titles.as_json(:include => :irc_user) }
     end
   end
 

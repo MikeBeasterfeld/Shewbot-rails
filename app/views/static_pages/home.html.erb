@@ -1,0 +1,119 @@
+<div class="container">
+	<div class="navbar navbar-default" role="navigation">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="/">Shewbot</a>
+		</div>
+		<p class="navbar-text pull-right">
+			Don't refresh, jerks!
+		</p>
+	</div>
+	<h2>Current title goes here</h2>
+	<div id="titles" class="row">Loading...</div>
+</div>
+
+<script id="headerTemplate" type="text/template">
+<tr>
+	<th>Vote</th>
+	<th>Title</th>
+	<th>Submitter</th>
+	<th>Votes</th>
+</tr>
+</script>
+<script id="titleTemplate" type="text/template">
+	<td><span class="vote glyphicon glyphicon-arrow-up" id="<%%= id %>"></span></td>
+	<td><%%= title %></td>
+	<td><%%= irc_user.name %></td>
+	<td><%%= votes_count %></td>
+</script>
+<script>var titles = []</script>
+<!--<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>-->
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone-min.js"></script>
+<script>
+	(function ($) {
+
+	    var Shewbot = {};
+	    window.Shewbot = Shewbot;
+
+	    Shewbot.Title = Backbone.Model.extend({
+	    });
+
+	    Shewbot.Titles = Backbone.Collection.extend({
+	        url: "/titles.json",
+	        model: Shewbot.Title,
+	        comparator: function(a, b) {
+	            return a.get("votes_count") < b.get("votes_count") ?  1
+	                 : a.get("votes_count") > b.get("votes_count") ? -1
+	                 : a.get("id") < b.get("id") ?  1
+	                 : a.get("id") > b.get("id") ? -1
+	                 :                              0;
+	        }
+	    })
+
+	    Shewbot.TitleView = Backbone.View.extend({
+	        tagName: "tr",
+	        className: "title",
+	        events: {},
+	        template: $("#titleTemplate").html(),
+
+	        render: function() {
+	            var tmpl = _.template(this.template);
+
+	            this.$el.html(tmpl(this.model.toJSON()));
+	            //console.log(this);
+	            return this;
+	        }
+	    });
+
+	    Shewbot.TitleCollectionView = Backbone.View.extend({
+	        tagName: "table",
+	        className: "table",
+	        template: $("#headerTemplate").html(),
+	        initialize: function( titleSet ) {
+	            this.titles = new Shewbot.Titles ( titleSet );
+	            this.titles.on('all', this.render, this);
+	            this.titles.on('all', function() {
+	                //console.log("event on title collection", arguments);
+	            });
+	            this.titles.fetch();
+	            this.interval = window.setInterval( _.bind( function() { this.titles.fetch(); this.titles.sort() }, this ), 10000);
+	        },
+	        render: function() {
+	            //console.log("TitleCollectionView render");
+	            //console.log(this.titles);
+	            this.$el.empty();
+
+	            this.$el.append(this.template);
+
+	            this.titles.each(function(title) {
+	                //console.log("TitleCollectionView render each title");
+	                var view = new Shewbot.TitleView({model: title});
+	                this.$el.append(view.render().el);
+	            }, this);
+	            return this;
+	        },
+
+
+	    });
+
+	    Shewbot.boot = function(container, titleSet ) {
+	        container = $(container);
+	        titleTable = new Shewbot.TitleCollectionView( titleSet );
+	        container.empty();
+	        container.append(titleTable.render().el);
+	    }
+
+	} (jQuery));
+</script>
+<script>
+	$(document).on("click", "span.vote", function(event) {
+		//console.log("click" + event.target.id, this);
+		$.get("/titles/" + event.target.id + "/vote");
+		$(this).hide();
+	});
+
+	$(function() {
+		var titleTable = Shewbot.boot($("#titles"), titles);
+	});
+</script>

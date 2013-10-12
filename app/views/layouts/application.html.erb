@@ -1,21 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Shewbot</title>
+  <title><%= full_title(yield(:title)) %></title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "application", controller_name %>
   <%= csrf_meta_tags %>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 </head>
 <body>
-<p>
-	<%= link_to "IRC Users", irc_users_path %>
-	<%= link_to "Titles", titles_path %>
-	<%= link_to "Votes", votes_path %>
-	<%= link_to "Shows", shows_path %>
-</p>
 
+	<%= yield %>
 
-<%= yield %>
-
-</body
+	<%= debug(params) if Rails.env.development? %>
+</body>
 </html>
