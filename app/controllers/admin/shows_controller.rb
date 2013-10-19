@@ -46,8 +46,8 @@ class Admin::ShowsController < ApplicationController
 
     respond_to do |format|
       if @show.save
-        format.html { redirect_to @show, notice: 'Show was successfully created.' }
-        format.json { render json: @show, status: :created, location: @show }
+        format.html { redirect_to admin_show_url(@show), notice: 'Show was successfully created.' }
+        format.json { render json: @show, status: :created, location: admin_show_url(@show) }
       else
         format.html { render action: "new" }
         format.json { render json: @show.errors, status: :unprocessable_entity }
@@ -78,7 +78,7 @@ class Admin::ShowsController < ApplicationController
     @show.destroy
 
     respond_to do |format|
-      format.html { redirect_to shows_url }
+      format.html { redirect_to admin_shows_url }
       format.json { head :no_content }
     end
   end
