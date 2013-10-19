@@ -10,8 +10,7 @@ Title collection and voting
 
 == Other setup notes
 
-* Make sure you set the callback in your Twitter dev account.
-* Log in through Twitter, then in the database set your newly created user account to be an admin
-
+* Make sure you set the callback in your Twitter dev account. (http://hostname/auth/twitter/callback)
+* Log in through Twitter, then in the database set your newly created user account to be an admin (user table, admin boolean column)
 
 
