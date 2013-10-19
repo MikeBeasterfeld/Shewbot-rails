@@ -1,0 +1,27 @@
+<h1>Listing shows</h1>
+
+<table class="table">
+  <tr>
+    <th>Title</th>
+    <th>Created at</th>
+    <th>Updated at</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @shows.each do |show| %>
+  <tr>
+    <td><%= show.title %></td>
+    <td><%= show.created_at %></td>
+    <td><%= show.updated_at %></td>
+    <td><%= link_to 'Show', admin_show_path(show) %></td>
+    <td><%= link_to 'Edit', edit_admin_show_path(show) %></td>
+    <td><%= link_to 'Destroy', admin_show_path(show), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Show', new_admin_show_path %>

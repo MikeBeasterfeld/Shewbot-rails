@@ -4,6 +4,8 @@ ruby "1.9.3"
 
 gem 'rails', '3.2.14'
 
+gem 'omniauth-twitter'
+
 group :development, :test do
 	gem 'sqlite3'
 	gem 'rspec-rails'

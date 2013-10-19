@@ -15,3 +15,5 @@
 /tmp
 
 /.vagrant
+
+/config/config.yml

@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Voterip:</b>
+  <%= @vote.voterip %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= link_to @vote.title.title, admin_title_path(@vote.title) %>
+</p>
+
+<p>
+  <b>Created:</b>
+  <%= @vote.created_at %>
+</p>
+
+<p>
+  <b>Updated:</b>
+  <%= @vote.updated_at %>
+</p>
+
+
+<%= link_to 'Edit', edit_admin_vote_path(@vote) %> |
+<%= link_to 'Back', admin_votes_path %>

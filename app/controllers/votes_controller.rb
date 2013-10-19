@@ -1,6 +1,5 @@
-class VotesController < ApplicationController
-  # GET /votes
-  # GET /votes.json
+class Admin::VotesController < ApplicationController
+
   def index
     @votes = Vote.all
 
@@ -10,8 +9,6 @@ class VotesController < ApplicationController
     end
   end
 
-  # GET /votes/1
-  # GET /votes/1.json
   def show
     @vote = Vote.find(params[:id])
 
@@ -21,8 +18,6 @@ class VotesController < ApplicationController
     end
   end
 
-  # GET /votes/new
-  # GET /votes/new.json
   def new
     @vote = Vote.new
 
@@ -32,19 +27,17 @@ class VotesController < ApplicationController
     end
   end
 
-  # GET /votes/1/edit
+
   def edit
     @vote = Vote.find(params[:id])
   end
 
-  # POST /votes
-  # POST /votes.json
   def create
     @vote = Vote.new(params[:vote])
 
     respond_to do |format|
       if @vote.save
-        format.html { redirect_to @vote, notice: 'Vote was successfully created.' }
+        format.html { redirect_to admin_vote_url(@vote), notice: 'Vote was successfully created.' }
         format.json { render json: @vote, status: :created, location: @vote }
       else
         format.html { render action: "new" }
@@ -60,7 +53,7 @@ class VotesController < ApplicationController
 
     respond_to do |format|
       if @vote.update_attributes(params[:vote])
-        format.html { redirect_to @vote, notice: 'Vote was successfully updated.' }
+        format.html { redirect_to admin_vote_url(@vote), notice: 'Vote was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -76,7 +69,7 @@ class VotesController < ApplicationController
     @vote.destroy
 
     respond_to do |format|
-      format.html { redirect_to votes_url }
+      format.html { redirect_to admin_votes_url }
       format.json { head :no_content }
     end
   end

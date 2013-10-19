@@ -1,0 +1,27 @@
+<h1>Listing irc_users</h1>
+
+<table class="table">
+  <tr>
+    <th>Name</th>
+    <th>Created</th>
+    <th>Updates</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @irc_users.each do |irc_user| %>
+  <tr>
+    <td><%= irc_user.name %></td>
+    <td><%= irc_user.created_at %></td>
+    <td><%= irc_user.updated_at %></td>
+    <td><%= link_to 'Show', admin_irc_user_path(irc_user) %></td>
+    <td><%= link_to 'Edit', edit_admin_irc_user_path(irc_user) %></td>
+    <td><%= link_to 'Destroy', admin_irc_user_path(irc_user), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<!-- <%= link_to 'New Irc user', new_admin_irc_user_path %> -->

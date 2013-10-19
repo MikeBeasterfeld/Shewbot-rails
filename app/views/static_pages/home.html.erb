@@ -1,15 +1,7 @@
-<div class="container">
-	<div class="navbar navbar-default" role="navigation">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="/">Shewbot</a>
-		</div>
-		<p class="navbar-text pull-right">
-			Don't refresh, jerks!
-		</p>
-	</div>
-	<h2>Current title goes here</h2>
-	<div id="titles" class="row">Loading...</div>
-</div>
+
+<h2>Current title goes here</h2>
+<div id="titles" class="row">Loading...</div>
+
 
 <script id="headerTemplate" type="text/template">
 <tr>
@@ -26,10 +18,6 @@
 	<td><%%= votes_count %></td>
 </script>
 <script>var titles = []</script>
-<!--<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>-->
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone-min.js"></script>
 <script>
 	(function ($) {
 
@@ -109,7 +97,7 @@
 <script>
 	$(document).on("click", "span.vote", function(event) {
 		//console.log("click" + event.target.id, this);
-		$.get("/titles/" + event.target.id + "/vote");
+		$.get("/title/" + event.target.id + "/upvote");
 		$(this).hide();
 	});
 

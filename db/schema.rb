@@ -11,7 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131012161224) do
+ActiveRecord::Schema.define(:version => 20131018174744) do
+
+  create_table "apis", :force => true do |t|
+    t.string   "name"
+    t.string   "key"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "authorizations", :force => true do |t|
+    t.string   "provider"
+    t.string   "uid"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "irc_users", :force => true do |t|
     t.string   "name"
@@ -35,6 +50,13 @@ ActiveRecord::Schema.define(:version => 20131012161224) do
     t.datetime "updated_at",                 :null => false
     t.integer  "show_id"
     t.integer  "votes_count", :default => 0
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.boolean  "admin"
   end
 
   create_table "votes", :force => true do |t|

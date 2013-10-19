@@ -1,0 +1,33 @@
+<h1>Listing titles</h1>
+
+<table class="table">
+  <tr>
+    <th>Title</th>
+    <th>Title lc</th>
+    <th>Ircuser</th>
+    <th>Show</th>
+    <th>Created at</th>
+    <th>Updated at</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @titles.each do |title| %>
+  <tr>
+    <td><%= title.title %></td>
+    <td><%= title.title_lc %></td>
+    <td><%= title.irc_user.name %></td>
+    <td><%= title.show.title %></td>
+    <td><%= title.created_at %></td>
+    <td><%= title.updated_at %></td>
+    <td><%= link_to 'Show', admin_title_path(title) %></td>
+    <td><%= link_to 'Edit', edit_admin_title_path(title) %></td>
+    <td><%= link_to 'Destroy', admin_title_path(title), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Title', new_admin_title_path %>

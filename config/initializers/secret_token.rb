@@ -4,4 +4,18 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-Shewbot::Application.config.secret_token = '29204a35ec135dd9b704bcb53aa47aa7971ac4f1a6eeb3041f72b33009ecfbfdf9b84f48a652a2fcaf47c5382e0568f223dc33f4af204169fb580168c0b8cac6'
+
+if ENV["SECRET_TOKEN"].blank?
+  if Rails.env.production?
+    raise "You must set ENV[\"SECRET_TOKEN\"] in your app's config vars"
+  elsif Rails.env.test?
+    ENV["SECRET_TOKEN"] = Shewbot::Application.config.secret_token = SecureRandom.hex(30)
+  else
+    config_file = File.expand_path(File.join(Rails.root, '/config/config.yml'))
+    config = YAML.load_file(config_file)
+    ENV["SECRET_TOKEN"] = config[Rails.env]['SECRET_TOKEN'] = SecureRandom.hex(30)
+    File.open(config_file, 'w') { |file| file.write(config.to_yaml) }
+  end
+end
+
+Shewbot::Application.config.secret_token = ENV["SECRET_TOKEN"]

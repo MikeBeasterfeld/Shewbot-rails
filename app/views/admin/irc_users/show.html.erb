@@ -1,0 +1,10 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @irc_user.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_admin_irc_user_path(@irc_user) %> |
+<%= link_to 'Back', admin_irc_users_path %>

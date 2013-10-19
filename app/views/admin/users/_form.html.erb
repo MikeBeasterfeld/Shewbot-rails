@@ -1,0 +1,28 @@
+<%= form_for [:admin, @user] do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <fieldset>
+      <legend>Admin</legend>
+      <%= f.radio_button :admin, true %> <%= f.label :admin_true, 'Yes' %><br />
+      <%= f.radio_button :admin, false %> <%= f.label :admin_false, 'No' %><br />
+    </fieldset>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

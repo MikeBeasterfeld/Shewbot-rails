@@ -1,0 +1,29 @@
+<h1>Listing votes</h1>
+
+<table class="table">
+  <tr>
+    <th>Voterip</th>
+    <th>Title</th>
+    <th>Created at</th>
+    <th>Updated at</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @votes.each do |vote| %>
+  <tr>
+    <td><%= vote.voterip %></td>
+    <td><%= link_to vote.title.title, admin_title_path(vote.title) %></td>
+    <td><%= vote.created_at %></td>
+    <td><%= vote.updated_at %></td>
+    <td><%= link_to 'Show', admin_vote_path(vote) %></td>
+    <td><%= link_to 'Edit', edit_admin_vote_path(vote) %></td>
+    <td><%= link_to 'Destroy', admin_vote_path(vote), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Vote', new_admin_vote_path %>

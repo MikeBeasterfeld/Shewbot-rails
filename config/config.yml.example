@@ -1,0 +1,5 @@
+---
+development:
+  SECRET_TOKEN:
+  TWITTER_CONSUMER_KEY: asdf
+  TWITTER_CONSUMER_SECRET: asdf
