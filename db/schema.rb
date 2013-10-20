@@ -11,11 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131018174744) do
+ActiveRecord::Schema.define(:version => 20131019154317) do
 
   create_table "apis", :force => true do |t|
     t.string   "name"
-    t.string   "key"
+    t.string   "api_key"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
