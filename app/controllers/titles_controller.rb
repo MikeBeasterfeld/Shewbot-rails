@@ -23,7 +23,7 @@ class TitlesController < ApplicationController
   end
 
   def create
-    title = Show.current_show.titles.new(params[:title])
+    title = Show.update_current_show(fetch_live_show_title).titles.new(param[:title])
 
   	title.irc_user = IrcUser.find_or_create_by_name(params[:user][:name])
 
