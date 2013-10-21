@@ -3,13 +3,12 @@ Shewbot and/or Showbot
 
 Title collection and voting
 
-Environment Variables Required
+Settings Variables Required
 ------------------------------
 
-* SECRET_TOKEN - Your secret key for verifying the integrity of signed cookies. If you change this key, all old signed cookies will become invalid! Make sure the secret is at least 30 characters and all random, no regular words or you'll be exposed to dictionary attacks.
-* TWITTER_CONSUMER_KEY
-* TWITTER_CONSUMER_SECRET
-* LIVE_URL - URL of the live show json
+* twitter_consumer_key
+* twitter_consumer_secret
+* live_url - URL of the live show json
 
 Other setup notes
 -----------------
