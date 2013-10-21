@@ -6,6 +6,7 @@ gem 'rails', '3.2.14'
 
 gem 'omniauth-twitter'
 gem 'rest-client'
+gem 'rails_config'
 
 group :development, :test do
 	gem 'sqlite3'
