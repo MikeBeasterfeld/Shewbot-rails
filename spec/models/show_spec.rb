@@ -20,11 +20,26 @@ describe Show do
 	describe "new show" do 
 		before { 
 			@show.save 
-			@show = Show.update_current_show("This New Show")
+			@newshow = Show.update_current_show("This New Show")
+			@newshow.save
 		}
 
-		it { @show.title.should == "This New Show" }
+		it { @newshow.title.should == "This New Show" }
+		it { @newshow.id != @show.id }
 		it { Show.current_show.title.should == "This New Show" }
+	end
+
+	describe "same show" do 
+		before { 
+			@show.save 
+			@newshow = Show.update_current_show("Sample Show")
+			@newshow.save
+		}
+
+		it { Show.current_show.title.should == "Sample Show" }
+		it { Show.current_show.id.should == @show.id }
+		it { @newshow.title.should == "Sample Show" }
+		it { @newshow.id.should == @show.id }
 	end
 
 end
