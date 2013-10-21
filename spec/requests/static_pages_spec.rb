@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe "Static Pages" do
 
+	before { Show.new(title: "Show Title").save }
+
 	let(:base_title) { "Showbot" }
 
 	describe "Home Page" do
