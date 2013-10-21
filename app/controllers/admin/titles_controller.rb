@@ -51,7 +51,7 @@ class Admin::TitlesController < ApplicationController
 
     respond_to do |format|
       if @title.update_attributes(params[:title])
-        format.html { redirect_to @title, notice: 'Title was successfully updated.' }
+        format.html { redirect_to admin_title_url(@title), notice: 'Title was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -65,7 +65,7 @@ class Admin::TitlesController < ApplicationController
     @title.destroy
 
     respond_to do |format|
-      format.html { redirect_to titles_url }
+      format.html { redirect_to admin_titles_url }
       format.json { head :no_content }
     end
   end
