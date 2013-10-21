@@ -25,9 +25,9 @@ class TitlesController < ApplicationController
   end
 
   def create
-    title = Show.update_current_show(fetch_live_show_title).titles.new(params[:title])
+    title = Show.update_current_show(fetch_live_show_title).titles.new(title: params[:title])
 
-  	title.irc_user = IrcUser.find_or_create_by_name(params[:user][:name])
+  	title.irc_user = IrcUser.find_or_create_by_name(params[:user])
 
     if title.save
       render json: title, status: :created
