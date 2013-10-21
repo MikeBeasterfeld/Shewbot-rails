@@ -6,9 +6,9 @@ Title collection and voting
 Settings Variables Required
 ------------------------------
 
-* twitter_consumer_key
-* twitter_consumer_secret
-* live_url - URL of the live show json
+* Settings.twitter_consumer_key
+* Settings.twitter_consumer_secret
+* Settings.live_url - URL of the live show json
 
 Other setup notes
 -----------------
