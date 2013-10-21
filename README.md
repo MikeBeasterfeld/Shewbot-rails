@@ -20,6 +20,6 @@ Other setup notes
 API Endpoints
 -------------
 
-* POST /titles/create - API Key protected - submit a new title as JSON: {"title":{"title":"This is the title"},"user":"ThisIsAUserName"}}
+* POST /titles/create - API Key protected - submit a new title as JSON: {"title":"This is the title","user":"ThisIsAUserName"}
 * GET /title/<id>/vote - add a vote to a title
 * GET /titles - titles of the current or last live show
