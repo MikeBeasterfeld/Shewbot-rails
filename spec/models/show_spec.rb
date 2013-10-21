@@ -17,4 +17,14 @@ describe Show do
 		it { should_not be_valid }
 	end
 
+	describe "new show" do 
+		before { 
+			@show.save 
+			@show = Show.update_current_show("This New Show")
+		}
+
+		it { @show.title.should == "This New Show" }
+		it { Show.current_show.title.should == "This New Show" }
+	end
+
 end
