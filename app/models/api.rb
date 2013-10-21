@@ -1,11 +1,9 @@
 class Api < ActiveRecord::Base
-	after_initialize :generate_api_key
+	before_create :generate_api_key
 
   attr_accessible :api_key, :name
 
-  validates_presence_of :name, :api_key
-
-  validates_length_of :api_key, :is => 32
+  validates_presence_of :name
 
   private
 
