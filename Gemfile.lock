@@ -95,6 +95,8 @@ GEM
       activesupport (= 3.2.14)
       bundler (~> 1.0)
       railties (= 3.2.14)
+    rails_config (0.3.3)
+      activesupport (>= 3.0)
     railties (3.2.14)
       actionpack (= 3.2.14)
       activesupport (= 3.2.14)
@@ -161,6 +163,7 @@ DEPENDENCIES
   jquery-rails
   omniauth-twitter
   rails (= 3.2.14)
+  rails_config
   rest-client
   rspec-rails
   sass (= 3.2.10)
