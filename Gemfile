@@ -4,23 +4,22 @@ ruby "1.9.3"
 
 gem 'rails', '3.2.14'
 
+gem 'jquery-rails'
 gem 'omniauth-twitter'
 gem 'rest-client'
 gem 'rails_config'
+gem 'sqlite3'
 
 group :development, :test do
-	gem 'sqlite3'
 	gem 'rspec-rails'
 end
 
 group :assets do
 	gem 'sass', '3.2.10'
-  gem 'sass-rails'
-  gem 'coffee-rails'
-  gem 'uglifier'
+	gem 'sass-rails'
+	gem 'coffee-rails'
+	gem 'uglifier'
 end
-
-gem 'jquery-rails'
 
 group :test do
 	gem 'capybara', '1.1.2'
@@ -28,5 +27,4 @@ group :test do
 end
 
 group :production do
-  # gem 'pg'
 end
