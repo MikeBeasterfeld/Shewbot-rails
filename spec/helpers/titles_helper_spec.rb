@@ -14,7 +14,7 @@ require 'webmock/rspec'
 
 describe TitlesHelper do
   describe "Grabs non-live show JSON and returns nil" do
-  	before { stub_request(:get, ENV['LIVE_URL']).to_return(:body => '{"live":false}') }
+  	before { stub_request(:get, Settings.live_url).to_return(:body => '{"live":false}') }
 
   	it { helper.fetch_live_show_title.should be_nil }
   end
@@ -23,7 +23,7 @@ end
 
 describe TitlesHelper do
   describe "Grabs live show JSON and returns the title" do
-  	before { stub_request(:get, ENV['LIVE_URL']).to_return( :body => JSON_content() ) }
+  	before { stub_request(:get, Settings.live_url).to_return( :body => JSON_content() ) }
 
   	it { helper.fetch_live_show_title.should == "Amplified" }
   end
