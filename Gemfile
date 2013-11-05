@@ -33,5 +33,6 @@ end
 
 group :herokuproduction do
 	gem 'pg'
+	gem 'thin'
 end
 
