@@ -8,9 +8,9 @@ gem 'jquery-rails'
 gem 'omniauth-twitter'
 gem 'rest-client'
 gem 'rails_config'
-gem 'sqlite3'
 
 group :development, :test do
+	gem 'sqlite3'
 	gem 'rspec-rails'
 	gem 'thin'
 end
@@ -28,4 +28,10 @@ group :test do
 end
 
 group :production do
+	gem 'sqlite3'
 end
+
+group :herokuproduction do
+	gem 'pg'
+end
+
