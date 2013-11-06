@@ -19,11 +19,7 @@ module ApplicationHelper
 
 	def check_api_key
 		authenticate_or_request_with_http_token do |token, options|
-			if Api.exists?(api_key: token)
-				return true
-			else
-				head :unauthorized
-			end
+			Api.exists?(api_key: token)
 		end
 	end
 
