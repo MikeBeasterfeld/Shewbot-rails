@@ -1,5 +1,7 @@
+puts Settings.twitter_consumer_secret
+
 Rails.application.config.middleware.use OmniAuth::Builder do 
-	provider :twitter, Settings.twitter_consumer_secret, Settings.twitter_consumer_key
+	provider :twitter, Settings.twitter_consumer_key, Settings.twitter_consumer_secret
 	  {
 	    :secure_image_url => 'true',
 	    :image_size => 'original',
@@ -8,3 +10,4 @@ Rails.application.config.middleware.use OmniAuth::Builder do
 	    }
 	  }	
 end
+
