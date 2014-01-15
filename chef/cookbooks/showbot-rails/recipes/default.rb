@@ -18,7 +18,7 @@ rbenv_gem "bundler" do
 end
 
 rbenv_execute "run" do
-  command "bundle install"
+  command "bundle install --without herokuproduction:production"
   cwd "/vagrant"
   ruby_version ruby_version
 end
