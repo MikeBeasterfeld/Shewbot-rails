@@ -18,6 +18,7 @@
 #
 
 default['postgresql']['enable_pgdg_apt'] = false
+default['postgresql']['server']['config_change_notify'] = :restart
 
 case node['platform']
 when "debian"
@@ -39,9 +40,9 @@ when "debian"
     default['postgresql']['server']['service_name'] = "postgresql"
   end
 
-  default['postgresql']['client']['packages'] = %w{postgresql-client libpq-dev}
-  default['postgresql']['server']['packages'] = %w{postgresql}
-  default['postgresql']['contrib']['packages'] = %w{postgresql-contrib}
+  default['postgresql']['client']['packages'] = ["postgresql-client-#{node['postgresql']['version']}","libpq-dev"]
+  default['postgresql']['server']['packages'] = ["postgresql-#{node['postgresql']['version']}"]
+  default['postgresql']['contrib']['packages'] = ["postgresql-contrib-#{node['postgresql']['version']}"]
 
 when "ubuntu"
 
@@ -62,13 +63,9 @@ when "ubuntu"
     default['postgresql']['server']['service_name'] = "postgresql"
   end
 
-  default['postgresql']['client']['packages'] = %w{postgresql-client libpq-dev}
-  if node['postgresql']['enable_pgdg_apt']
-    default['postgresql']['server']['packages'] = ["postgresql-#{node['postgresql']['version']}"]
-  else
-    default['postgresql']['server']['packages'] = %w{postgresql}
-  end
-  default['postgresql']['contrib']['packages'] = %w{postgresql-contrib}
+  default['postgresql']['client']['packages'] = ["postgresql-client-#{node['postgresql']['version']}","libpq-dev"]
+  default['postgresql']['server']['packages'] = ["postgresql-#{node['postgresql']['version']}"]
+  default['postgresql']['contrib']['packages'] = ["postgresql-contrib-#{node['postgresql']['version']}"]
 
 when "fedora"
 
@@ -104,7 +101,7 @@ when "redhat", "centos", "scientific", "oracle"
   default['postgresql']['version'] = "8.4"
   default['postgresql']['dir'] = "/var/lib/pgsql/data"
 
-  if node['platform_version'].to_f >= 6.0
+  if node['platform_version'].to_f >= 6.0 && node['postgresql']['version'] == '8.4'
     default['postgresql']['client']['packages'] = %w{postgresql-devel}
     default['postgresql']['server']['packages'] = %w{postgresql-server}
     default['postgresql']['contrib']['packages'] = %w{postgresql-contrib}
@@ -113,7 +110,14 @@ when "redhat", "centos", "scientific", "oracle"
     default['postgresql']['server']['packages'] = ["postgresql#{node['postgresql']['version'].split('.').join}-server"]
     default['postgresql']['contrib']['packages'] = ["postgresql#{node['postgresql']['version'].split('.').join}-contrib"]
   end
-  default['postgresql']['server']['service_name'] = "postgresql"
+
+  if node['platform_version'].to_f >= 6.0 && node['postgresql']['version'] != '8.4'
+     default['postgresql']['dir'] = "/var/lib/pgsql/#{node['postgresql']['version']}/data"
+     default['postgresql']['server']['service_name'] = "postgresql-#{node['postgresql']['version']}"
+  else
+    default['postgresql']['dir'] = "/var/lib/pgsql/data"
+    default['postgresql']['server']['service_name'] = "postgresql"
+  end
 
 when "suse"
 
@@ -207,7 +211,7 @@ default['postgresql']['initdb_locale'] = nil
 # access to the PGDG yum repositories. Links to RPMs for installation
 # on the supported version/platform combinations are listed at
 # http://yum.postgresql.org/repopackages.php, and the links for
-# PostgreSQL 8.4, 9.0, 9.1 and 9.2 (from 2013-01-15) are captured below.
+# PostgreSQL 8.4, 9.0, 9.1, 9.2 and 9.3 are captured below.
 #
 # The correct RPM for installing /etc/yum.repos.d is based on:
 # * the attribute configuring the desired Postgres Software:
@@ -309,10 +313,6 @@ default['postgresql']['pgdg']['repo_rpm_url'] = {
       "16" => {
         "i386" => "http://yum.postgresql.org/9.2/fedora/fedora-16-i386/pgdg-fedora92-9.2-5.noarch.rpm",
         "x86_64" => "http://yum.postgresql.org/9.2/fedora/fedora-16-x86_64/pgdg-fedora92-9.2-5.noarch.rpm"
-      },
-      "15" => {
-        "i386" => "http://yum.postgresql.org/9.2/fedora/fedora-15-i386/pgdg-fedora92-9.2-5.noarch.rpm",
-        "x86_64" => "http://yum.postgresql.org/9.2/fedora/fedora-15-x86_64/pgdg-fedora92-9.2-5.noarch.rpm"
       }
     }
   },

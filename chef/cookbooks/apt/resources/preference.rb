@@ -2,7 +2,7 @@
 # Cookbook Name:: apt
 # Resource:: preference
 #
-# Copyright 2010-2011, Opscode, Inc.
+# Copyright 2010-2013, Opscode, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,5 +25,6 @@ def initialize(*args)
 end
 
 attribute :package_name, :kind_of => String, :name_attribute => true
+attribute :glob, :kind_of => String
 attribute :pin, :kind_of => String
 attribute :pin_priority, :kind_of => String
