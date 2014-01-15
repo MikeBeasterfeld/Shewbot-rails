@@ -1,5 +1,5 @@
 
-<h2><%= @current_show_title %></h2>
+<h2 id="currentshowtitle">Hello<%= @current_show_title %></h2>
 <div id="titles" class="row">Loading...</div>
 
 
@@ -104,4 +104,16 @@
 	$(function() {
 		var titleTable = Shewbot.boot($("#titles"), titles);
 	});
+
+	function showupdate() {
+		$.getJSON(  
+		    '/shows/current',  
+		    {},  
+		    function(json) {  
+		        $("#currentshowtitle").html(json.title);
+		    }  
+		);
+	}
+
+	setInterval(showupdate, 10000);
 </script>

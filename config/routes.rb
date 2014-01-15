@@ -23,6 +23,6 @@ Shewbot::Application.routes.draw do
   match '/titles/create', to: 'titles#create'
   match '/titles', to: 'titles#index'
   match '/title/:id/upvote', to: 'titles#upvote'
-
+  match '/shows/current', to: 'shows#current'
 
 end
