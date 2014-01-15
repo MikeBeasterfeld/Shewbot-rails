@@ -10,9 +10,15 @@ gem 'rest-client'
 gem 'rails_config'
 
 group :development, :test do
-	gem 'sqlite3'
 	gem 'rspec-rails'
+end
+
+group :development, :test, :herokuproduction do
 	gem 'thin'
+end
+
+group :development, :test, :production do
+	gem 'sqlite3'
 end
 
 group :assets do
@@ -27,12 +33,7 @@ group :test do
 	gem 'webmock'
 end
 
-group :production do
-	gem 'sqlite3'
-end
-
 group :herokuproduction do
 	gem 'pg'
-	gem 'thin'
 end
 
