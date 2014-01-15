@@ -12,7 +12,11 @@
 </tr>
 </script>
 <script id="titleTemplate" type="text/template">
-	<td><span class="vote glyphicon glyphicon-arrow-up" id="<%%= id %>"></span></td>
+	<td>
+		<%% if (votes.length === 0) { %>
+			<span class="vote glyphicon glyphicon-arrow-up" id="<%%= id %>"></span>
+		<%% } %>
+	</td>
 	<td><%%= title %></td>
 	<td><%%= irc_user.name %></td>
 	<td><%%= votes_count %></td>

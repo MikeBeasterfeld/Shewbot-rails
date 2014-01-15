@@ -5,9 +5,9 @@ class TitlesController < ApplicationController
 	respond_to :json
 
   def index
-    @titles = Show.current_show.titles.all
+    @titles = Show.current_show.titles.joins("LEFT OUTER JOIN votes ON titles.id = votes.title_id AND votes.voterip = '#{request.remote_ip}'").all
 
-    render json: @titles.as_json(:include => :irc_user)
+    render json: @titles.as_json(:include => [:irc_user, :votes])
   end
 
   def upvote
