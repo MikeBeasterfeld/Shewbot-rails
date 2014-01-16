@@ -37,7 +37,7 @@ class Admin::TitlesController < ApplicationController
 
     respond_to do |format|
       if @title.save
-        format.html { redirect_to @title, notice: 'Title was successfully created.' }
+        format.html { redirect_to admin_title_url(@title), notice: 'Title was successfully created.' }
         format.json { render json: @title, status: :created, location: @title }
       else
         format.html { render action: "new" }
