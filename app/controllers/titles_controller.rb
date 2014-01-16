@@ -5,7 +5,7 @@ class TitlesController < ApplicationController
 	respond_to :json
 
   def index
-    @titles = Show.current_show.titles.joins("LEFT OUTER JOIN votes ON titles.id = votes.title_id AND votes.voterip = '#{request.remote_ip}'").all
+    @titles = Show.current_show.titles.with_votes_from_ip(request.remote_ip)
 
     render json: @titles.as_json(:include => [:irc_user, :votes])
   end

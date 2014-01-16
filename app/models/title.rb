@@ -15,6 +15,8 @@ class Title < ActiveRecord::Base
 
   after_initialize :set_title_lc
 
+  scope :with_votes_from_ip, lambda { |ipaddress| joins("LEFT OUTER JOIN votes ON titles.id = votes.title_id AND votes.voterip = '#{ipaddress}'") }
+
   def set_title_lc
   	if self.title
 	  	self.title_lc = self.title.downcase
