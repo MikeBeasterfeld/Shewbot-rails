@@ -64,25 +64,22 @@
 	        template: $("#headerTemplate").html(),
 	        initialize: function( titleSet ) {
 	            this.titles = new Shewbot.Titles ( titleSet );
-	            this.titles.on('all', this.render, this);
+	            this.titles.on('sync', this.render, this);
 	            this.titles.on('all', function() {
-	                //console.log("event on title collection", arguments);
+//	                console.log("event on title collection", arguments);
 	            });
 	            this.titles.fetch();
-	            this.interval = window.setInterval( _.bind( function() { this.titles.fetch(); this.titles.sort() }, this ), 10000);
+	            this.interval = window.setInterval( _.bind( function() { this.titles.fetch() }, this ), 10000);
 	        },
 	        render: function() {
-	            //console.log("TitleCollectionView render");
-	            //console.log(this.titles);
 	            this.$el.empty();
-
 	            this.$el.append(this.template);
 
 	            this.titles.each(function(title) {
-	                //console.log("TitleCollectionView render each title");
 	                var view = new Shewbot.TitleView({model: title});
 	                this.$el.append(view.render().el);
 	            }, this);
+
 	            return this;
 	        },
 
