@@ -7,7 +7,7 @@ class TitlesController < ApplicationController
   def index
     @titles = Show.current_show.titles.with_votes_from_ip(request.remote_ip)
 
-    render json: @titles.as_json(:include => [:irc_user, :votes])
+    render json: @titles.as_json(:include => :irc_user)
   end
 
   def upvote
