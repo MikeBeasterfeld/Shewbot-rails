@@ -46,7 +46,7 @@
 				<p class="navbar-text pull-right">
 					<% if current_user %>
 						Hello <%= current_user.name %>
-					<% else %>
+					<% elsif Settings.show_twitter_auth %>
 						<%= link_to "Twitter Auth", "/auth/twitter" %>
 					<% end %>
 				</p>
