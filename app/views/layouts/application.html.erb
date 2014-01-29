@@ -41,9 +41,6 @@
 			
 			<% end %>
 				<p class="navbar-text pull-right">
-					Don't refresh, jerks!
-				</p>
-				<p class="navbar-text pull-right">
 					<% if current_user %>
 						Hello <%= current_user.name %>
 					<% elsif Settings.show_twitter_auth %>
