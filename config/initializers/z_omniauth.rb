@@ -4,7 +4,8 @@ Rails.application.config.middleware.use OmniAuth::Builder do
 	    :secure_image_url => 'true',
 	    :image_size => 'original',
 	    :authorize_params => {
-	      :lang => 'en'
+	      :lang => 'en',
+	      :use_authorize => true
 	    }
 	  }	
 end
