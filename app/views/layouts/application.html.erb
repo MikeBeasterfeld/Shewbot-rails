@@ -6,6 +6,9 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+  <% if !Settings.custom_css_url.nil? %>
+  	<link rel="stylesheet" href="<%= Settings.custom_css_url %>">
+  <% end %>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone-min.js"></script>
