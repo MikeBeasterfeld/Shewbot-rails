@@ -1,7 +1,12 @@
 module ApplicationHelper
 
+	def site_title
+		return Settings.site_title unless Settings.site_title.nil?
+		return 'Showbot'
+	end
+
 	def full_title(page_title)
-		base_title = "Showbot"
+		base_title = site_title
 		if page_title.empty?
 			base_title
 		else
