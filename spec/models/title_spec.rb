@@ -2,7 +2,11 @@ require 'spec_helper'
 
 describe Title do 
 
-	before { @title = Title.new(title: "Sample Title", show_id: 1, irc_user_id: 1, votes_count: 0) }
+	before { 
+		show = Show.create(title: "Sample show")
+		show.save
+		@title = show.titles.new(title: "Sample Title", show_id: 1, irc_user_id: 1, votes_count: 0) 
+	}
 
 	subject { @title }
 
@@ -54,6 +58,19 @@ describe Title do
 		}
 
 		it { should_not be_valid }
+	end
+
+
+	describe "should be deleted when a show is deleted" do
+		before {
+			@title.save
+			show = @title.show
+			show.destroy
+		}
+
+		it {
+			expect { @title.reload }.to raise_error
+		}
 	end
 
 end

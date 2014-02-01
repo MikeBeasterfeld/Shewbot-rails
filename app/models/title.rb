@@ -11,11 +11,9 @@ class Title < ActiveRecord::Base
   belongs_to :show
   belongs_to :irc_user
 
-  has_many :votes
+  has_many :votes, :dependent => :destroy
 
   after_initialize :set_title_lc
-
-  #scope :with_votes_from_ip, lambda { |ipaddress| joins("LEFT OUTER JOIN votes ON titles.id = votes.title_id AND votes.voterip = '#{ipaddress}'") }
 
   scope :with_votes_from_ip, lambda { |ipaddress| joins("LEFT OUTER JOIN votes ON titles.id = votes.title_id AND votes.voterip = '#{ipaddress}'").select("titles.*, votes.id AS voteid") }
 

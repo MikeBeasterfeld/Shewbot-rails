@@ -3,7 +3,7 @@ class Show < ActiveRecord::Base
 
   validates :title, presence: true
 
-  has_many :titles
+  has_many :titles, :dependent => :destroy
 
   def self.current_show
   	self.order("created_at DESC").first
