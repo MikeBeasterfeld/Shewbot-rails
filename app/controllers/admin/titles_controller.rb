@@ -1,5 +1,5 @@
 class Admin::TitlesController < ApplicationController
-  before_filter :check_admin, :except => :index
+  before_filter :check_admin
 
   def index
     @titles = Title.all
