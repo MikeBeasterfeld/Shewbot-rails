@@ -1,10 +1,11 @@
-<h1>Listing shows</h1>
+<h1>Shows</h1>
 
 <table class="table">
   <tr>
     <th>Title</th>
     <th>Episode Number</th>
-    <th>Title Count<th>
+    <th>Title Count</th>
+    <th>Date</th>
   </tr>
 
 <% @shows.each do |show| %>
@@ -12,6 +13,7 @@
     <td><%= link_to show.title, show_path(show) %></td>
     <td><%= show.episode_number %></td>
     <td><%= show.titles_count %></td>
+    <td><%= show.created_at.to_formatted_s(:long) %></td>
   </tr>
 <% end %>
 </table>
