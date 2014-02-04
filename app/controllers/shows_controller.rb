@@ -20,7 +20,7 @@ class ShowsController < ApplicationController
 
   def show
     @show = Show.find(params[:id])
-    @titles = @show.titles.order(votes_count: :desc)
+    @titles = @show.titles.order("votes_count DESC")
 
     respond_to do |format|
       format.html # show.html.erb
