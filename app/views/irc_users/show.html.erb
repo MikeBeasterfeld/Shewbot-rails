@@ -13,7 +13,7 @@
 
 <% @titles.each do |title| %>
   <tr>
-    <td><%= title.show.title %></td>
+    <td><%= title.show.title %> <%= title.show.episode_number %></td>
     <td><%= title.title %></td>
     <td><%= title.votes_count %></td>
   </tr>
