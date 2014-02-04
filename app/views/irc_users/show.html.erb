@@ -3,7 +3,7 @@
 <h2>
 	<%= @irc_user.name %> has <%= pluralize(@vote_count, 'vote') %> on <%= pluralize(@titles.count, 'title') %>
 	<% if @titles.count > 0 %>
-	(<%= @vote_count/@titles.count.to_f %> average)
+	(<%= (@vote_count/@titles.count.to_f).round(2) %> average)
 	<% end %>
 </h2>
 
