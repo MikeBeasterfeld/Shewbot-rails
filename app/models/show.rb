@@ -1,5 +1,5 @@
 class Show < ActiveRecord::Base
-  attr_accessible :title
+  attr_accessible :title, :episode_number
 
   validates :title, presence: true
 
