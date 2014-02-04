@@ -8,7 +8,7 @@ class Title < ActiveRecord::Base
 
   validates_uniqueness_of :title_lc, :scope => :show_id, :message => 'Title already submitted'
 
-  belongs_to :show
+  belongs_to :show, :counter_cache => true
   belongs_to :irc_user
 
   has_many :votes, :dependent => :destroy
