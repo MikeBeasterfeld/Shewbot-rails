@@ -10,7 +10,7 @@ class ShowsController < ApplicationController
   end
 
   def index
-    @shows = Show.all
+    @shows = Show.order("created_at DESC")
 
     respond_to do |format|
       format.html # index.html.erb
