@@ -10,6 +10,8 @@ Shewbot::Application.routes.draw do
   match '/title/:id/upvote', to: 'titles#upvote'
   match '/shows/current', to: 'shows#current', via: :get
 
+  resources :irc_users, only: :show
+
   resources :shows, only: [:index, :show]
 
   namespace :admin do

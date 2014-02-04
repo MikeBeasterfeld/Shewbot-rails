@@ -16,7 +16,7 @@
 <% @titles.each do |title| %>
 	<tr>
     <td><%= title.title %></td>
-    <td><%= title.irc_user.name %></td>
+    <td><%= link_to title.irc_user.name, irc_user_path(title.irc_user.id) %></td>
     <td><%= title.votes_count %></td>
   </tr>
 <% end %>  

@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+
+
+<h2><%= @irc_user.name %> has <%= pluralize(@vote_count, 'vote') %></h2>
+
+<table class="table">
+  <tr>
+    <th>Show</th>
+    <th>Title</th>
+    <th>Votes</th>
+  </tr>
+
+<% @titles.each do |title| %>
+  <tr>
+    <td><%= title.show.title %></td>
+    <td><%= title.title %></td>
+    <td><%= title.votes_count %></td>
+  </tr>
+<% end %>
+</table>
+
