@@ -10,7 +10,7 @@
 <% @shows.each do |show| %>
   <tr>
     <td><%= link_to show.title, show_path(show) %></td>
-    <td></td>
+    <td><%= show.episode_number %></td>
     <td><%= show.titles_count %></td>
   </tr>
 <% end %>
