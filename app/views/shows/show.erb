@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+
+<h2><%= @show.title %></h2>
+
+<p>
+  <b>Created at:</b>
+  <%= @show.created_at %>
+</p>
+
+<table class="table">
+	<tr>
+		<th>Title</th>
+		<th>Submitter</th>
+		<th>Votes</th>
+	</tr>
+<% @titles.each do |title| %>
+	<tr>
+    <td><%= title.title %></td>
+    <td><%= title.irc_user.name %></td>
+    <td><%= title.votes_count %></td>
+  </tr>
+<% end %>  
+</table>
+

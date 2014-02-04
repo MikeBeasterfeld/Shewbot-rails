@@ -6,6 +6,7 @@ Shewbot::Application.routes.draw do
   get "static_pages/about"
 
   resources :currenttitles
+  resources :shows, only: [:index, :show]
 
   namespace :admin do
     resources :apis

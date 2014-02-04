@@ -1,0 +1,20 @@
+<h1>Listing shows</h1>
+
+<table class="table">
+  <tr>
+    <th>Title</th>
+    <th>Episode Number</th>
+    <th>Title Count<th>
+  </tr>
+
+<% @shows.each do |show| %>
+  <tr>
+    <td><%= link_to show.title, show_path(show) %></td>
+    <td></td>
+    <td><%= show.titles_count %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
