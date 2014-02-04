@@ -1,5 +1,5 @@
 class Title < ActiveRecord::Base
-  attr_accessible :created_at, :irc_user_id, :show_id, :title, :votes_count
+  attr_accessible :created_at, :irc_user_id, :show_id, :title
 
   validates :title, :presence => true, :length => { :maximum => 50 }
   validates :irc_user_id, :presence => true
