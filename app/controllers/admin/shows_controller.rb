@@ -62,7 +62,7 @@ class Admin::ShowsController < ApplicationController
 
     respond_to do |format|
       if @show.update_attributes(params[:show])
-        format.html { redirect_to @show, notice: 'Show was successfully updated.' }
+        format.html { redirect_to admin_show_url(@show), notice: 'Show was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
