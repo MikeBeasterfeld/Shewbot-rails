@@ -3,6 +3,7 @@
 <table class="table">
   <tr>
     <th>Title</th>
+    <th>Episode Number</th>
     <th>Created at</th>
     <th>Updated at</th>
     <th></th>
@@ -13,6 +14,7 @@
 <% @shows.each do |show| %>
   <tr>
     <td><%= show.title %></td>
+    <td><%= show.episode_number %></td>
     <td><%= show.created_at %></td>
     <td><%= show.updated_at %></td>
     <td><%= link_to 'Show', admin_show_path(show) %></td>
