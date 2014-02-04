@@ -16,7 +16,7 @@ class TitlesController < ApplicationController
 		if title
 			vote = title.votes.new(voterip: request.remote_ip)
 
-			if vote.save
+			if title.show.id == Show.maximum('id') && vote.save
 				render json: vote, status: :created
 			else
 				render json: vote.errors, status: :unprocessable_entity
