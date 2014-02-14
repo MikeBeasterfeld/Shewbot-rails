@@ -102,6 +102,12 @@
 		$(this).hide();
 	});
 
+	$(document).on("touchend", "span.vote", function(event) {
+		//console.log("click" + event.target.id, this);
+		$.get("/title/" + event.target.id + "/upvote");
+		$(this).hide();
+	});
+
 	$(function() {
 		var titleTable = Shewbot.boot($("#titles"), titles);
 	});
