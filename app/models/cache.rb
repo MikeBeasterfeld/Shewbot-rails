@@ -20,4 +20,8 @@ class Cache
 		visit_hash.count
 	end
 
+	def self.visitor_hash
+		Rails.cache.read('visitors')
+	end
+
 end

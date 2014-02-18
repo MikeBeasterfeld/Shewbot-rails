@@ -22,6 +22,7 @@ Shewbot::Application.routes.draw do
     resources :titles
     resources :shows
     resources :irc_users
+    resources :visitors, only: [:index]
   end
 
 end

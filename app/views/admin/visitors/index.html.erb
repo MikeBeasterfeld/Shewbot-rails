@@ -1,0 +1,19 @@
+<h1>Listing visitors</h1>
+
+<h4>Current time: <%= Time.now.to_i %></h4>
+
+<table class="table">
+  <tr>
+    <th>IP</th>
+    <th>Time</th>
+    <th>Expires</th>
+  </tr>
+
+<% @visitors.each do |ip, time| %>
+  <tr>
+    <td><%= ip %></td>
+    <td><%= time %></td>
+    <td><%= time - Time.now.to_i + 10 %></td>
+  </tr>
+<% end %>
+</table>
