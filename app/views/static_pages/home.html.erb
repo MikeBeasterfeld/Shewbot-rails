@@ -1,6 +1,17 @@
 
-<h2 id="currentshowtitle"><%= @current_show_title %></h2>
-<h4 class="pull-right"><span id="viewers">1 person</span> viewing this page</h4>
+<row>
+	<div class="col-md-6">
+		<h2 id="currentshowtitle"><%= @current_show_title %></h2>
+	</div>
+	<div class="col-md-6">
+		<p class="pull-right">
+			<span id="viewers">1 person</span> viewing this page
+			<br/>
+			Refresh in <span id="refresh">10</span>
+		</p>
+	</div>
+</row>
+
 <div id="titles" class="row">Loading...</div>
 
 
@@ -81,6 +92,8 @@
 	                this.$el.append(view.render().el);
 	            }, this);
 
+	            window.timercountdown = 10;
+
 	            return this;
 	        },
 
@@ -138,5 +151,14 @@
 		);
 	}
 	setInterval(visitorupdate, 10000);
+
+	function refreshupdate() {
+		window.timercountdown = window.timercountdown - 1
+    $("#refresh").html(window.timercountdown);
+	}
+
+	window.timercountdown = 10;
+
+	setInterval(refreshupdate, 1000);
 
 </script>
