@@ -1,5 +1,6 @@
 
 <h2 id="currentshowtitle"><%= @current_show_title %></h2>
+<h4 class="pull-right"><span id="viewers">1 person</span> viewing this page</h4>
 <div id="titles" class="row">Loading...</div>
 
 
@@ -121,6 +122,21 @@
 		    }  
 		);
 	}
-
 	setInterval(showupdate, 10000);
+
+	function visitorupdate() {
+		$.getJSON(  
+		    '/sessions/visitor_count',  
+		    {},  
+		    function(json) {
+		    		updatetext = json.visitors + ' people';
+		    		if (json.visitors === 1) {
+		    			updatetext = json.visitors + ' person';
+		    		}
+		        $("#viewers").html(updatetext);
+		    }  
+		);
+	}
+	setInterval(visitorupdate, 10000);
+
 </script>

@@ -23,4 +23,8 @@ class SessionsController < ApplicationController
 		redirect_to root_url
 	end
 
+	def visitor_count
+		render json: {:visitors => Cache.visitor_count}
+	end
+
 end

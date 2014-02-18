@@ -5,6 +5,7 @@ Shewbot::Application.routes.draw do
 
   match '/auth/twitter/callback', to: 'sessions#create'
   match '/auth/failure', to: 'sessions#failure'
+  match '/sessions/visitor_count', to: 'sessions#visitor_count'
   match '/titles/create', to: 'titles#create'
   match '/titles', to: 'titles#index'
   match '/title/:id/upvote', to: 'titles#upvote'

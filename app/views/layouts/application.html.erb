@@ -58,7 +58,8 @@
 
 		<%= debug(params) if Rails.env.development? %>
 		<%= debug(Settings) if Rails.env.development? %>
-		<footer>
+		<%= debug(Cache.visitor_count) if Rails.env.development? %>
+		<footer> 
 			<p>Source code on <a href="https://github.com/holycow/shewbot-rails">Github</a>.</p>
 		</footer>
 	</div>
