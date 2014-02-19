@@ -1,26 +1,25 @@
 
-<row>
-	<div class="col-md-6">
+<div class="row">
+	<div class="col-md-3">
 		<h2 id="currentshowtitle"><%= @current_show_title %></h2>
-	</div>
-	<div class="col-md-6">
-		<p class="pull-right">
+		<p>
 			<span id="viewers">1 person</span> viewing this page
 			<br/>
 			Refresh in <span id="refresh">10</span>
 		</p>
 	</div>
-</row>
-
-<div id="titles" class="row">Loading...</div>
+	<div class="col-md-9">
+		<div id="titles" class="row">Loading...</div>
+	</div>
+</div>
 
 
 <script id="headerTemplate" type="text/template">
 <tr>
-	<th>Vote</th>
-	<th>Title</th>
-	<th>Submitter</th>
-	<th>Votes</th>
+	<th id="latest">Newest to Oldest</th>
+	<th id="title">Title</th>
+	<th id="submitter">Submitter</th>
+	<th id="votes">Votes</th>
 </tr>
 </script>
 <script id="titleTemplate" type="text/template">
@@ -46,14 +45,23 @@
 	    Shewbot.Titles = Backbone.Collection.extend({
 	        url: "/titles.json",
 	        model: Shewbot.Title,
+
+					sortAttribute: "votes_count",
+					sortDirection: 1,
+
+					sortTitles: function (attr) {
+						this.sortAttribute = attr;
+						this.sort();
+					},
+			 
 	        comparator: function(a, b) {
-	            return a.get("votes_count") < b.get("votes_count") ?  1
-	                 : a.get("votes_count") > b.get("votes_count") ? -1
+	            return a.get(this.sortAttribute) < b.get(this.sortAttribute) ?  1
+	                 : a.get(this.sortAttribute) > b.get(this.sortAttribute) ? -1
 	                 : a.get("id") < b.get("id") ?  1
 	                 : a.get("id") > b.get("id") ? -1
 	                 :                              0;
 	        }
-	    })
+	    });
 
 	    Shewbot.TitleView = Backbone.View.extend({
 	        tagName: "tr",
@@ -96,15 +104,18 @@
 
 	            return this;
 	        },
-
-
+	        titleSort: function(attr) {
+	        		this.titles.sortTitles(attr);
+	        		this.render();
+	        }
 	    });
 
-	    Shewbot.boot = function(container, titleSet ) {
+	    Shewbot.boot = function(container, titleSet) {
 	        container = $(container);
 	        titleTable = new Shewbot.TitleCollectionView( titleSet );
 	        container.empty();
 	        container.append(titleTable.render().el);
+	        return titleTable;
 	    }
 
 	} (jQuery));
@@ -122,8 +133,57 @@
 		$(this).hide();
 	});
 
+	function sortByTitle() {
+		titleTable.titleSort('title');
+	}
+
+	function sortBySubmitter() {
+		titleTable.titleSort('irc_user.name');
+	}
+
+	function sortByVotes() {
+		titleTable.titleSort('votes_count');
+	}
+
+	function sortByLatest() {
+		titleTable.titleSort('id');
+	}
+
 	$(function() {
 		var titleTable = Shewbot.boot($("#titles"), titles);
+	});
+
+	$(document).on("click", "th#title", function(event) {
+		sortByTitle();
+	});
+
+	$(document).on("touchend", "th#title", function(event) {
+		sortByTitle();
+	});
+
+
+	$(document).on("click", "th#submitter", function(event) {
+		sortBySubmitter();
+	});
+
+	$(document).on("touchend", "th#submitter", function(event) {
+		sortBySubmitter();
+	});
+
+	$(document).on("click", "th#votes", function(event) {
+		sortByVotes();
+	});
+
+	$(document).on("touchend", "th#votes", function(event) {
+		sortByVotes();
+	});
+
+	$(document).on("click", "th#latest", function(event) {
+		sortByLatest();
+	});
+
+	$(document).on("touchend", "th#latest", function(event) {
+		sortByLatest();
 	});
 
 	function showupdate() {
