@@ -55,10 +55,24 @@
 					},
 			 
 	        comparator: function(a, b) {
-	            return a.get(this.sortAttribute) < b.get(this.sortAttribute) ?  1
-	                 : a.get(this.sortAttribute) > b.get(this.sortAttribute) ? -1
-	                 : a.get("id") < b.get("id") ?  1
-	                 : a.get("id") > b.get("id") ? -1
+	        		console.log(this.sortAttribute);
+	        		a_get = a.get(this.sortAttribute);
+	        		b_get = b.get(this.sortAttribute);
+	        		this.sortDirection = 1;
+	        		if (this.sortAttribute === 'irc_user') {
+	        			a_get = a_get.name.toUpperCase();
+	        			b_get = b_get.name.toUpperCase();
+	        			this.sortDirection = -1;
+	        		}
+	        		if (this.sortAttribute === 'title') {
+	        			a_get = a_get.toUpperCase();
+	        			b_get = b_get.toUpperCase();
+	        			this.sortDirection = -1;
+	        		}
+	            return a_get < b_get ?  1 * this.sortDirection
+	                 : a_get > b_get ? -1 * this.sortDirection
+	                 : a.get("id") < b.get("id") ?  1 * this.sortDirection
+	                 : a.get("id") > b.get("id") ? -1 * this.sortDirection
 	                 :                              0;
 	        }
 	    });
@@ -138,7 +152,7 @@
 	}
 
 	function sortBySubmitter() {
-		titleTable.titleSort('irc_user.name');
+		titleTable.titleSort('irc_user');
 	}
 
 	function sortByVotes() {
