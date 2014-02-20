@@ -1,0 +1,10 @@
+site "http://community.opscode.com/api/v1"
+
+cookbook "rbenv"
+cookbook "nodejs"
+
+cookbook "sqlite-dev",
+	:git => "https://github.com/HolyCow/sqlite-dev"
+
+cookbook "railsstarter",
+	:path => "customcookbooks/railsstarter"

@@ -1,44 +1,20 @@
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
-
 Vagrant.configure("2") do |config|
+
   config.vm.box = "precise32"
   config.vm.box_url = "http://files.vagrantup.com/precise32.box"
-  config.omnibus.chef_version = '10.26.0'
-    
+
+  config.omnibus.chef_version = :latest
+
   config.ssh.forward_agent = true
 
-  config.vm.network :forwarded_port, guest: 3000, host: 3001
-
-  config.vm.provision :chef_solo do |chef|
-    chef.cookbooks_path = ["chef/cookbooks"]
-
-    chef.json = {
-      "postgresql" => {
-        "password" => {
-          "postgres" => "thiswilldofornow",
-        }
-      }
-    }
+  config.vm.network "forwarded_port", guest: 3000, host: 3000,
+    auto_correct: true
     
+  config.vm.provision :chef_solo do |chef|
+    chef.cookbooks_path = ["cookbooks"]
+
     chef.run_list = [
-      "recipe[showbot-rails::default]"
+      "recipe[railsstarter::default]"
     ]
-
-    # chef.cookbooks_path = ["chef/cookbooks"]
-    # chef.add_recipe "apt"
-    # chef.add_recipe "build-essential"
-    # chef.add_recipe "postgresql"
-    # chef.add_recipe "postgresql::server"
-    # chef.add_recipe "custom::rvm"
-    # chef.add_recipe "custom::postgres"
-    # chef.json = {
-    #   "postgresql" => {
-    #     "password" => {
-    #       "postgres" => "thiswilldofornow",
-    #     }
-    #   }
-    # }
   end
-
 end
