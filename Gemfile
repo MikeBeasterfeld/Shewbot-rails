@@ -35,5 +35,6 @@ end
 
 group :herokuproduction do
 	gem 'pg'
+	gem 'newrelic_rpm'
 end
 
