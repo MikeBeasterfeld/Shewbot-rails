@@ -8,6 +8,7 @@ gem 'jquery-rails'
 gem 'omniauth-twitter'
 gem 'rest-client'
 gem 'rails_config'
+gem 'newrelic_rpm'
 
 group :development, :test do
 	gem 'rspec-rails'
@@ -15,7 +16,6 @@ end
 
 group :development, :test, :herokuproduction do
 	gem 'thin'
-	gem 'newrelic_rpm'
 end
 
 group :development, :test, :production do
@@ -36,6 +36,5 @@ end
 
 group :herokuproduction do
 	gem 'pg'
-	gem 'newrelic_rpm'
 end
 
