@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby "2.0.0"
 
-gem 'rails', '3.2.14'
+gem 'rails', '3.2.17'
 
 gem 'jquery-rails'
 gem 'omniauth-twitter'
@@ -15,6 +15,7 @@ end
 
 group :development, :test, :herokuproduction do
 	gem 'thin'
+	gem 'newrelic_rpm'
 end
 
 group :development, :test, :production do
