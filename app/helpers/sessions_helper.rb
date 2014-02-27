@@ -20,4 +20,27 @@ module SessionsHelper
 		!current_user.nil?
 	end
 
+	def check_admin
+		check_oauth
+		if admin?
+			return true
+		else
+			redirect_to root_url
+		end
+	end
+
+	def admin?
+		if current_user && current_user.admin
+			return true
+		else
+			return false
+		end
+	end
+
+	def check_oauth
+		unless logged_in?
+			redirect_to "/auth/twitter"
+		end
+	end
+
 end
