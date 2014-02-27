@@ -9,8 +9,14 @@ describe User do
 
 	it { should respond_to(:name) }	
 	it { should respond_to(:admin) }
+	it { should respond_to(:remember_token) }
 
 	it { @user.admin?.should be_false }
+
+	describe "remember token" do
+		before { @user.save }
+		its(:remember_token) { should_not be_blank }
+	end
 
 end
 
