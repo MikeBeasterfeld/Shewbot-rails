@@ -38,7 +38,7 @@ module SessionsHelper
 	end
 
 	def check_oauth
-		unless logged_in?
+		unless signed_in?
 			redirect_to "/auth/twitter"
 		end
 	end
