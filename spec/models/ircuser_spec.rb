@@ -27,4 +27,14 @@ describe IrcUser do
 
 		it { should_not be_valid }
 	end
+
+	describe "name find and create is case insensitive" do
+		before do
+			@ircuser.save
+			@uppercase_find = IrcUser.find_or_create_by_name('JXPX802.11')
+		end
+
+		it { should == @uppercase_find }
+	end
+
 end

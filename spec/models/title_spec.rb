@@ -5,7 +5,7 @@ describe Title do
 	before { 
 		show = Show.create(title: "Sample show")
 		show.save
-		@title = show.titles.new(title: "Sample Title", show_id: 1, irc_user_id: 1, votes_count: 0) 
+		@title = show.titles.new(title: "Sample Title", show_id: 1, irc_user_id: 1) 
 	}
 
 	subject { @title }
