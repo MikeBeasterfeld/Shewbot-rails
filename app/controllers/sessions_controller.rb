@@ -13,6 +13,8 @@ class SessionsController < ApplicationController
 			user.save
 		end
 
+		sign_in user
+
 		session[:userid] = user.id
 
 		redirect_to root_url
