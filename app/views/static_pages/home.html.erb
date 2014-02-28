@@ -29,7 +29,7 @@
 		<%% } %>
 	</td>
 	<td><%%- title %></td>
-	<td><%%= irc_user.name %></td>
+	<td><%%= irc_user_name %></td>
 	<td><%%= votes_count %></td>
 </script>
 <script>var titles = []</script>
@@ -59,9 +59,9 @@
 	        		a_get = a.get(this.sortAttribute);
 	        		b_get = b.get(this.sortAttribute);
 	        		this.sortDirection = 1;
-	        		if (this.sortAttribute === 'irc_user') {
-	        			a_get = a_get.name.toUpperCase();
-	        			b_get = b_get.name.toUpperCase();
+	        		if (this.sortAttribute === 'irc_user_name') {
+	        			a_get = a_get.toUpperCase();
+	        			b_get = b_get.toUpperCase();
 	        			this.sortDirection = -1;
 	        		}
 	        		if (this.sortAttribute === 'title') {
@@ -152,7 +152,7 @@
 	}
 
 	function sortBySubmitter() {
-		titleTable.titleSort('irc_user');
+		titleTable.titleSort('irc_user_name');
 	}
 
 	function sortByVotes() {
