@@ -17,7 +17,7 @@ class Cache
 
 	def self.visitor_count
 		visit_hash = Rails.cache.read('visitors')
-		visit_hash.count
+		visit_hash.nil? ? 0 : visit_hash.count
 	end
 
 	def self.visitor_hash
