@@ -32,7 +32,7 @@ class TitlesController < ApplicationController
   	title.irc_user = IrcUser.find_or_create_by_name(params[:user])
 
     if title.show_id.nil?
-      render json: { 'Show' => [ 'is not live.' ]}, status: :unprocessable_entity
+      render json: { 'Show' => [ 'is not live' ]}, status: :unprocessable_entity
     elsif title.save
       render json: title, status: :created
     else

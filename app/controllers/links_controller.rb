@@ -17,7 +17,9 @@ class LinksController < ApplicationController
 
     link.irc_user = IrcUser.find_or_create_by_name(params[:user])
 
-    if link.save
+    if link.show_id.nil?
+      render json: { 'Show' => [ 'is not live' ]}, status: :unprocessable_entity
+    elsif link.save
       render json: link, status: :created
     else
       render json: link.errors, status: :unprocessable_entity
