@@ -7,6 +7,8 @@ environment_settings[:live_url] = ENV['LIVE_URL'] if ENV['LIVE_URL']
 environment_settings[:show_twitter_auth] = ENV['SHOW_TWITTER_AUTH'] if ENV['SHOW_TWITTER_AUTH']
 environment_settings[:site_title] = ENV['SITE_TITLE'] if ENV['SITE_TITLE']
 environment_settings[:custom_css_url] = ENV['CUSTOM_CSS_URL'] if ENV['CUSTOM_CSS_URL']
+environment_settings[:irc_channel] = ENV['IRC_CHANNEL'] if ENV['IRC_CHANNEL']
+environment_settings[:audio_url] = ENV['AUDIO_URL'] if ENV['AUDIO_URL']
 
 File.open(Dir.pwd + '/environment.yml', 'w+') do |f| 
 	f.write(environment_settings.to_yaml)

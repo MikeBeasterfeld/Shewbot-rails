@@ -6,9 +6,14 @@ Shewbot::Application.routes.draw do
   match '/auth/twitter/callback', to: 'sessions#create'
   match '/auth/failure', to: 'sessions#failure'
   match '/sessions/visitor_count', to: 'sessions#visitor_count'
+
   match '/titles/create', to: 'titles#create'
   match '/titles', to: 'titles#index'
   match '/title/:id/upvote', to: 'titles#upvote'
+
+  match '/links/create', to: 'links#create'
+  match '/links', to: 'links#index'
+
   match '/shows/current', to: 'shows#current', via: :get, :defaults => { :format => 'json' }
 
   resources :irc_users, only: :show

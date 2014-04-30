@@ -6,6 +6,8 @@ class StaticPagesController < ApplicationController
   	else
   		@current_show_title = "No shows yet"
   	end
+    @irc_channel = Settings.irc_channel
+    @audio_url = Settings.audio_url
   end
 
   def help

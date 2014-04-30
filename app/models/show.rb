@@ -4,6 +4,7 @@ class Show < ActiveRecord::Base
   validates :title, presence: true
 
   has_many :titles, :dependent => :destroy
+  has_many :links, :dependent => :destroy
 
   def self.current_show
   	self.order("created_at DESC").first

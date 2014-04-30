@@ -1,3 +1,32 @@
+<% if !@irc_channel.nil? || !@audio_url.nil? %>
+	<div class="row">
+		<div class="col-md-12">
+			<a data-toggle="collapse" data-parent="#accordion" href="#ChatAndAudio">
+	       <span class="glyphicon glyphicon-plus"></span> 
+	       	<% if !@irc_channel.nil? %> IRC Chat <% end %>
+	       	<% if !@irc_channel.nil? && !@audio_url.nil? %> and <% end %>
+	       	<% if !@audio_url.nil? %> Live Player <% end %>
+	    </a>
+	   </div>
+	</div>
+
+	<div id="ChatAndAudio" class="panel-collapse collapse">
+		<div class="row">
+			<% if !@irc_channel.nil? %>
+				<div class="col-md-8">
+					<iframe src="http://webchat.freenode.net/?channels=<%= @irc_channel %>" width="100%" height="500px"></iframe>
+				</div>
+			<% end %>
+			<% if !@audio_url.nil? %>
+				<div class="col-md-4">
+					<audio id="player" controls>
+			      <source src="<%= @audio_url %>" type="audio/mpeg">
+			    </audio>
+				</div>
+			<% end %>
+		</div>
+	</div>
+<% end %>
 
 <div class="row">
 	<div class="col-md-3">
@@ -9,7 +38,20 @@
 		</p>
 	</div>
 	<div class="col-md-9">
-		<div id="titles" class="row">Loading...</div>
+		<ul class="nav nav-tabs">
+		  <li class="active"><a href="#titles" data-toggle="tab">Titles</a></li>
+		  <li><a href="#links" data-toggle="tab">Links</a></li>
+		</ul>
+
+		<!-- Tab panes -->
+		<div class="tab-content">
+		  <div class="tab-pane active" id="titles">
+				<div id="titles" class="row">Loading...</div>
+			</div>
+			<div class="tab-pane" id="links">
+				<div id="links" class="row">Loading...</div>
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -32,7 +74,21 @@
 	<td><%%= irc_user_name %></td>
 	<td><%%= votes_count %></td>
 </script>
-<script>var titles = []</script>
+
+<script id="linkHeaderTemplate" type="text/template">
+<tr>
+	<th id="link">Link</th>
+	<th id="submitter">Submitter</th>
+</tr>
+</script>
+<script id="linkTemplate" type="text/template">
+	<td><a href="<%%- url %>"><%%- url %></a></td>
+	<td><%%= irc_user_name %></td>
+</script>
+
+<script>var titles = [];</script>
+<script>var links = [];</script>
+
 <script>
 	(function ($) {
 
@@ -132,8 +188,72 @@
 	        return titleTable;
 	    }
 
+
+	    // Link table
+
+	    Shewbot.Link = Backbone.Model.extend({
+	    });
+
+	    Shewbot.Links = Backbone.Collection.extend({
+	        url: "/links.json",
+	        model: Shewbot.Link,
+	    });
+
+	    Shewbot.LinkView = Backbone.View.extend({
+	        tagName: "tr",
+	        className: "link",
+	        events: {},
+	        template: $("#linkTemplate").html(),
+
+	        render: function() {
+	            var tmpl = _.template(this.template);
+
+	            this.$el.html(tmpl(this.model.toJSON()));
+	            //console.log(this);
+	            return this;
+	        }
+	    });
+
+	    Shewbot.LinkCollectionView = Backbone.View.extend({
+	        tagName: "table",
+	        className: "table",
+	        template: $("#linkHeaderTemplate").html(),
+	        initialize: function( linkSet ) {
+	            this.links = new Shewbot.Links ( linkSet );
+	            this.links.on('sync', this.render, this);
+	            this.links.on('all', function() {
+//	                console.log("event on title collection", arguments);
+	            });
+	            this.links.fetch();
+	            this.interval = window.setInterval( _.bind( function() { this.links.fetch() }, this ), 10000);
+	        },
+	        render: function() {
+	            this.$el.empty();
+	            this.$el.append(this.template);
+
+	            this.links.each(function(link) {
+	                var view = new Shewbot.LinkView({model: link});
+	                this.$el.append(view.render().el);
+	            }, this);
+
+	            window.timercountdown = 10;
+
+	            return this;
+	        }
+	    });
+
+	    Shewbot.linkBoot = function(container, linkSet) {
+	        container = $(container);
+	        linkTable = new Shewbot.LinkCollectionView( linkSet );
+	        container.empty();
+	        container.append(linkTable.render().el);
+	        return linkTable;
+	    }
+
+
 	} (jQuery));
 </script>
+
 <script>
 	$(document).on("click", "span.vote", function(event) {
 		//console.log("click" + event.target.id, this);
@@ -165,6 +285,7 @@
 
 	$(function() {
 		var titleTable = Shewbot.boot($("#titles"), titles);
+		var linkTable = Shewbot.linkBoot($("#links"), links);
 	});
 
 	$(document).on("click", "th#title", function(event) {
