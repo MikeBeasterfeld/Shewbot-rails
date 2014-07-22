@@ -9,6 +9,7 @@ gem 'omniauth-twitter'
 gem 'rest-client'
 gem 'rails_config'
 gem 'newrelic_rpm'
+gem 'unicorn'
 
 group :development, :test do
 	gem 'rspec-rails'
