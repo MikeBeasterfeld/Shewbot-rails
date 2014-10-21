@@ -1,0 +1,27 @@
+<h1>Listing questions</h1>
+
+<table>
+  <tr>
+    <th>Question</th>
+    <th>Show</th>
+    <th>Irc user</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @questions.each do |question| %>
+  <tr>
+    <td><%= question.question %></td>
+    <td><%= question.show_id %></td>
+    <td><%= question.irc_user_id %></td>
+    <td><%= link_to 'Show', question %></td>
+    <td><%= link_to 'Edit', edit_question_path(question) %></td>
+    <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Question', new_question_path %>

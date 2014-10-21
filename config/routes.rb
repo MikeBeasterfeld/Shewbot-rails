@@ -1,4 +1,7 @@
 Shewbot::Application.routes.draw do
+  resources :questions
+
+
   get "rake/routes"
 
   root to: 'static_pages#home'
@@ -13,6 +16,9 @@ Shewbot::Application.routes.draw do
 
   match '/links/create', to: 'links#create'
   match '/links', to: 'links#index'
+
+  match '/questions/create', to: 'questions#create'
+  match '/questions', to: 'questions#index'
 
   match '/shows/current', to: 'shows#current', via: :get, :defaults => { :format => 'json' }
 

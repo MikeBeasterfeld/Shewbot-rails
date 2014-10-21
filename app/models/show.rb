@@ -5,6 +5,7 @@ class Show < ActiveRecord::Base
 
   has_many :titles, :dependent => :destroy
   has_many :links, :dependent => :destroy
+  has_many :questions, :dependent => :destroy
 
   def self.current_show
   	self.order("created_at DESC").first

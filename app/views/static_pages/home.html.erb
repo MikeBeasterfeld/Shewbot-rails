@@ -39,8 +39,9 @@
 	</div>
 	<div class="col-md-9">
 		<ul class="nav nav-tabs" style="margin-bottom: 15px">
-		  <li class="active"><a href="#titlescontent" data-toggle="tab">Titles</a></li>
-		  <li><a href="#linkscontent" data-toggle="tab">Links</a></li>
+		  <li class="active"><a href="#titlescontent" data-toggle="tab">Titles <span class="badge" id="titlecount">0</span></a></li>
+      <li><a href="#linkscontent" data-toggle="tab">Links <span class="badge" id="linkcount">0</span></a></a></li>
+      <li><a href="#questionscontent" data-toggle="tab">Questions <span class="badge" id="questioncount">0</span></a></a></li>
 		</ul>
 
 		<!-- Tab panes -->
@@ -50,11 +51,16 @@
 					<div id="titles" class="col-md-12">Loading...</div>
 				</div>
 			</div>
-			<div class="tab-pane" id="linkscontent">
-		  	<div class="row">
-					<div id="links" class="col-md-12">Loading...</div>
-				</div>
-			</div>
+      <div class="tab-pane" id="linkscontent">
+        <div class="row">
+          <div id="links" class="col-md-12">Loading...</div>
+        </div>
+      </div>
+      <div class="tab-pane" id="questionscontent">
+        <div class="row">
+          <div id="questions" class="col-md-12">Loading...</div>
+        </div>
+      </div>
 		</div>
 	</div>
 </div>
@@ -90,8 +96,20 @@
 	<td><%%= irc_user_name %></td>
 </script>
 
+<script id="questionHeaderTemplate" type="text/template">
+<tr>
+  <th id="question">Question</th>
+  <th id="submitter">Submitter</th>
+</tr>
+</script>
+<script id="questionTemplate" type="text/template">
+  <td><%%- question %></td>
+  <td><%%= irc_user_name %></td>
+</script>
+
 <script>var titles = [];</script>
 <script>var links = [];</script>
+<script>var questions = [];</script>
 
 <script>
 	(function ($) {
@@ -115,7 +133,7 @@
 					},
 			 
 	        comparator: function(a, b) {
-	        		console.log(this.sortAttribute);
+	        		//console.log(this.sortAttribute);
 	        		a_get = a.get(this.sortAttribute);
 	        		b_get = b.get(this.sortAttribute);
 	        		this.sortDirection = 1;
@@ -175,6 +193,8 @@
 	            }, this);
 
 	            window.timercountdown = 10;
+
+              $("#titlecount").html(this.titles.length);
 
 	            return this;
 	        },
@@ -240,6 +260,8 @@
 	                this.$el.append(view.render().el);
 	            }, this);
 
+              $("#linkcount").html(this.links.length);
+
 	            window.timercountdown = 10;
 
 	            return this;
@@ -254,6 +276,68 @@
 	        return linkTable;
 	    }
 
+      // Question table
+
+      Shewbot.Question = Backbone.Model.extend({
+      });
+
+      Shewbot.Questions = Backbone.Collection.extend({
+          url: "/questions.json",
+          model: Shewbot.Question,
+      });
+
+      Shewbot.QuestionView = Backbone.View.extend({
+          tagName: "tr",
+          className: "question",
+          events: {},
+          template: $("#questionTemplate").html(),
+
+          render: function() {
+              var tmpl = _.template(this.template);
+
+              this.$el.html(tmpl(this.model.toJSON()));
+              //console.log(this);
+              return this;
+          }
+      });
+
+      Shewbot.QuestionCollectionView = Backbone.View.extend({
+          tagName: "table",
+          className: "table",
+          template: $("#questionHeaderTemplate").html(),
+          initialize: function( questionSet ) {
+              this.questions = new Shewbot.Questions ( questionSet );
+              this.questions.on('sync', this.render, this);
+              this.questions.on('all', function() {
+//                  console.log("event on title collection", arguments);
+              });
+              this.questions.fetch();
+              this.interval = window.setInterval( _.bind( function() { this.questions.fetch() }, this ), 10000);
+          },
+          render: function() {
+              this.$el.empty();
+              this.$el.append(this.template);
+
+              this.questions.each(function(question) {
+                  var view = new Shewbot.QuestionView({model: question});
+                  this.$el.append(view.render().el);
+              }, this);
+
+              $("#questioncount").html(this.questions.length);
+
+              window.timercountdown = 10;
+
+              return this;
+          }
+      });
+
+      Shewbot.questionBoot = function(container, questionSet) {
+          container = $(container);
+          questionTable = new Shewbot.QuestionCollectionView( questionSet );
+          container.empty();
+          container.append(questionTable.render().el);
+          return questionTable;
+      }
 
 	} (jQuery));
 </script>
@@ -289,7 +373,8 @@
 
 	$(function() {
 		var titleTable = Shewbot.boot($("#titles"), titles);
-		var linkTable = Shewbot.linkBoot($("#links"), links);
+    var linkTable = Shewbot.linkBoot($("#links"), links);
+    var questionTable = Shewbot.questionBoot($("#questions"), questions);
 	});
 
 	$(document).on("click", "th#title", function(event) {
