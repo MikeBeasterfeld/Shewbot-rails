@@ -1,4 +1,5 @@
 class QuestionsController < ApplicationController
+  include TitlesHelper
 
   before_filter :check_api_key, only: [:create]
   respond_to :json
