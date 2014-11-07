@@ -17,7 +17,7 @@
     <td><%= show.episode_number %></td>
     <td><%= show.created_at %></td>
     <td><%= show.updated_at %></td>
-    <td><%= link_to 'Show', admin_show_path(show) %></td>
+    <td><%= link_to 'View Show', show_path(show) %></td>
     <td><%= link_to 'Edit', edit_admin_show_path(show) %></td>
     <td><%= link_to 'Destroy', admin_show_path(show), method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
