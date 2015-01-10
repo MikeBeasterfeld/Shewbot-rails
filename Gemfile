@@ -11,6 +11,7 @@ gem 'rails_config'
 gem 'newrelic_rpm'
 gem 'unicorn'
 gem 'rails_12factor'
+gem 'bootstrap-sass'
 
 group :development, :test do
 	gem 'rspec-rails'
@@ -25,7 +26,6 @@ group :development, :test, :production do
 end
 
 group :assets do
-	gem 'sass', '3.2.10'
 	gem 'sass-rails'
 	gem 'coffee-rails'
 	gem 'uglifier'

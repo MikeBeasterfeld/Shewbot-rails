@@ -21,6 +21,6 @@ tmp
 
 .env
 
-/public
+public/assets
 
 environment.yml

@@ -30,6 +30,8 @@ GEM
       multi_json (~> 1.0)
     addressable (2.3.5)
     arel (3.0.3)
+    bootstrap-sass (3.3.1.0)
+      sass (~> 3.2)
     builder (3.0.4)
     capybara (1.1.2)
       mime-types (>= 1.16)
@@ -100,8 +102,13 @@ GEM
       activesupport (= 3.2.17)
       bundler (~> 1.0)
       railties (= 3.2.17)
+    rails_12factor (0.0.3)
+      rails_serve_static_assets
+      rails_stdout_logging
     rails_config (0.3.3)
       activesupport (>= 3.0)
+    rails_serve_static_assets (0.0.3)
+    rails_stdout_logging (0.0.3)
     railties (3.2.17)
       actionpack (= 3.2.17)
       activesupport (= 3.2.17)
@@ -173,6 +180,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bootstrap-sass
   capybara (= 1.1.2)
   coffee-rails
   jquery-rails
@@ -180,10 +188,10 @@ DEPENDENCIES
   omniauth-twitter
   pg
   rails (= 3.2.17)
+  rails_12factor
   rails_config
   rest-client
   rspec-rails
-  sass (= 3.2.10)
   sass-rails
   sqlite3
   thin

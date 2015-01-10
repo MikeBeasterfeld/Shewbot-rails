@@ -24,13 +24,6 @@ rbenv_gem "bundler" do
   ruby_version ruby_version
 end
 
-rbenv_execute "run" do
-  user "vagrant"
-  command "bundle install"
-  cwd "/vagrant"
-  ruby_version ruby_version
-end
-
 link "/home/vagrant/.bashrc" do
   to "/vagrant/customconfig/bashrc"
 end
