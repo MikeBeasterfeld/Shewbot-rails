@@ -10,6 +10,7 @@ gem 'rest-client'
 gem 'rails_config'
 gem 'newrelic_rpm'
 gem 'unicorn'
+gem 'rails_12factor'
 
 group :development, :test do
 	gem 'rspec-rails'
