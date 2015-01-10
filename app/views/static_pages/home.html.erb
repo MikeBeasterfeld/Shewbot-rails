@@ -410,7 +410,7 @@
 		sortByLatest();
 	});
 
-	function showupdate() {
+	function metaupdate() {
 		$.getJSON(  
 		    '/shows/current',  
 		    {},  
@@ -418,23 +418,19 @@
 		        $("#currentshowtitle").html(json.title);
 		    }  
 		);
+    $.getJSON(  
+        '/sessions/visitor_count',  
+        {},  
+        function(json) {
+            updatetext = json.visitors + ' people';
+            if (json.visitors === 1) {
+              updatetext = json.visitors + ' person';
+            }
+            $("#viewers").html(updatetext);
+        }  
+    );
 	}
-	setInterval(showupdate, 10000);
-
-	function visitorupdate() {
-		$.getJSON(  
-		    '/sessions/visitor_count',  
-		    {},  
-		    function(json) {
-		    		updatetext = json.visitors + ' people';
-		    		if (json.visitors === 1) {
-		    			updatetext = json.visitors + ' person';
-		    		}
-		        $("#viewers").html(updatetext);
-		    }  
-		);
-	}
-	setInterval(visitorupdate, 10000);
+	setInterval(metaupdate, 10000);
 
 	function refreshupdate() {
 		window.timercountdown = window.timercountdown - 1
