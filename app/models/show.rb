@@ -18,11 +18,11 @@ class Show < ActiveRecord::Base
       return current_show
     end
 
-    if current_show.nil? || current_show.title != new_show || current_show.created_at > 4.hours.ago
+    if current_show.nil? || current_show.title != new_show || current_show.created_at < 4.hours.ago
     	self.transaction do 
     		current_show = self.order("created_at DESC").lock(true).first
 
-    		if current_show.nil? || current_show.title != new_show || current_show.created_at > 4.hours.ago
+    		if current_show.nil? || current_show.title != new_show || current_show.created_at < 4.hours.ago
     			current_show = self.create(title: new_show)
     		end
     	end
