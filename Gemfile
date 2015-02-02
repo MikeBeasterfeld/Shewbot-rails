@@ -5,16 +5,20 @@ ruby "2.1.2"
 gem 'rails', '3.2.17'
 
 gem 'jquery-rails'
-gem 'omniauth-twitter'
 gem 'rest-client'
 gem 'rails_config'
 gem 'newrelic_rpm'
 gem 'unicorn'
 gem 'rails_12factor'
 gem 'bootstrap-sass'
+gem 'devise'
+
+group :development do
+  gem 'seed_dump'
+end
 
 group :development, :test do
-	gem 'rspec-rails'
+  gem 'rspec-rails'
 end
 
 group :development, :test, :herokuproduction do

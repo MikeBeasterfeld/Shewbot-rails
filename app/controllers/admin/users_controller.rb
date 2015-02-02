@@ -1,5 +1,5 @@
 class Admin::UsersController < ApplicationController
-  before_filter :check_admin
+  before_filter :authenticate_user!
   
   def index
     @users = User.all
@@ -48,6 +48,8 @@ class Admin::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+
+    params[:user].except! :password if params[:user][:password].blank?
 
     respond_to do |format|
       if @user.update_attributes(params[:user])

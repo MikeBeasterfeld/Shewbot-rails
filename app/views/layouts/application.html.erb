@@ -24,15 +24,15 @@
 				<%= link_to site_title, root_url, class: "navbar-brand" %>
 			</div>
 			<div class="collapse navbar-collapse navbar-ex1-collape">
-			<% if admin? %>
-
+			<% if user_signed_in? && !current_user.nil? && current_user.admin? %>
 				<ul class="nav navbar-nav">
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li><%= link_to "Users", admin_users_path %></li>
+              <li><%= link_to "Create a new episode", new_admin_show_path %></li>
+              <li><%= link_to "Users", admin_users_path %></li>
 							<li><%= link_to "Irc Users", admin_irc_users_path %></li>
-							<li><%= link_to "Shows", admin_shows_path %></li>
+							<li><%= link_to "Episodes", admin_shows_path %></li>
 							<li><%= link_to "Titles", admin_titles_path %></li>
 							<li><%= link_to "Votes", admin_votes_path %></li>
 							<li><%= link_to "API Keys", admin_apis_path %></li>
@@ -40,15 +40,18 @@
 						</ul>
 					</li>
 				</ul>
-			
 			<% end %>
+
 				<p class="navbar-text pull-right">
-					<% if signed_in? %>
+					<% if user_signed_in? && !current_user.nil? %>
 						Hello <%= current_user.name %>
-					<% elsif Settings.show_twitter_auth %>
-						<%= link_to "Twitter Auth", "/auth/twitter" %>
+            |
+            <%= link_to "Logout", destroy_user_session_path %></li>
+          <% else %>
+            <%= link_to "Login", new_user_session_path %></li>
 					<% end %>
-					<%= link_to "Older Shows", shows_path %>
+          |
+					<%= link_to "Older Episodes", shows_path %>
 				</p>
 			</div>
 		</nav>
@@ -56,7 +59,7 @@
 		<%= yield %>
 
 		<%= debug(params) if Rails.env.development? %>
-		<%= debug(Settings) if Rails.env.development? %>
+    <%= debug(Settings) if Rails.env.development? %>
 		<%= debug(Cache.visitor_count) if Rails.env.development? %>
 		<footer> 
 			<p>Source code on <a href="https://github.com/holycow/shewbot-rails">Github</a>.</p>

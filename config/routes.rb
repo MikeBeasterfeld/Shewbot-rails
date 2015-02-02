@@ -1,10 +1,17 @@
 Shewbot::Application.routes.draw do
-  resources :questions
+  devise_for :users, :skip => [:registrations] 
+  as :user do
+    get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'
+    put 'users' => 'devise/registrations#update', :as => 'user_registration'
+  end
 
+  resources :questions
 
   get "rake/routes"
 
   root to: 'static_pages#home'
+
+  match '/login', to: 'static_pages#login'
 
   match '/auth/twitter/callback', to: 'sessions#create'
   match '/auth/failure', to: 'sessions#failure'

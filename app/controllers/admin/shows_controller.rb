@@ -1,5 +1,5 @@
 class Admin::ShowsController < ApplicationController
-  before_filter :check_admin
+  before_filter :authenticate_user!
 
   # GET /shows
   # GET /shows.json

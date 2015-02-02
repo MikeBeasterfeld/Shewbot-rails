@@ -1,5 +1,5 @@
 class Admin::VisitorsController < ApplicationController
-  before_filter :check_admin
+  before_filter :authenticate_user!
 
   def index
     @visitors = Cache.visitor_hash

@@ -6,6 +6,7 @@ when 'development'
   Title.delete_all
   Vote.delete_all
   Link.delete_all
+  User.delete_all
 
   user1 = IrcUser.create(name: "testuser")
   user2 = IrcUser.create(name: "testuser2")
@@ -67,6 +68,8 @@ when 'development'
   show3.links.create(url: "http://5by5.tv", irc_user_id: user1.id)
 
   show3.questions.create(question: "How do I shot web?", irc_user_id: user1.id)
+
+  admin = User.create(admin: true, email: 'test@test.com', password: 'password', name: 'Showbot Admin')
 
 end
 

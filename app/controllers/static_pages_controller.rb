@@ -1,4 +1,6 @@
 class StaticPagesController < ApplicationController
+  before_filter :authenticate_user!, if: :user_signed_in?
+
   def home
   	current_show = Show.current_show
   	if current_show
@@ -14,5 +16,8 @@ class StaticPagesController < ApplicationController
   end
 
   def about
+  end
+
+  def login
   end
 end

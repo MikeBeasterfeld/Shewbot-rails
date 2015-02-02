@@ -1,5 +1,5 @@
 class Admin::TitlesController < ApplicationController
-  before_filter :check_admin
+  before_filter :authenticate_user!
 
   def index
     @titles = Title.all
