@@ -35,6 +35,15 @@ class AddDeviseToUsers < ActiveRecord::Migration
       # t.timestamps
     end
 
+    count = 0
+
+    User.all.each do |user|
+      user.email = "email#{count}@email.com"
+      user.password = Digest::MD5.digest user.email
+      user.save
+      count = count + 1
+    end
+
     add_index :users, :email,                unique: true
     add_index :users, :reset_password_token, unique: true
     # add_index :users, :confirmation_token,   unique: true
@@ -42,8 +51,21 @@ class AddDeviseToUsers < ActiveRecord::Migration
   end
 
   def self.down
-    # By default, we don't want to make any assumption about how to roll back a migration when your
-    # model already existed. Please edit below which fields you would like to remove in this migration.
-    raise ActiveRecord::IrreversibleMigration
+    remove_column :users, :email
+    remove_column :users, :encrypted_password
+
+      ## Recoverable
+    remove_column :users, :reset_password_token
+    remove_column :users, :reset_password_sent_at
+
+      ## Rememberable
+    remove_column :users, :remember_created_at
+
+      ## Trackable
+    remove_column :users, :sign_in_count
+    remove_column :users, :current_sign_in_at
+    remove_column :users, :last_sign_in_at
+    remove_column :users, :current_sign_in_ip
+    remove_column :users, :last_sign_in_ip
   end
 end
