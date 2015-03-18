@@ -11,7 +11,10 @@ class Show < ActiveRecord::Base
   	self.order("created_at DESC").first
   end
 
-  def self.update_current_show(title = nil, art = nil)
+  def self.update_current_show(show_data = [])
+    title = show_data[0]
+    art = show_data[1]
+
     current_show = self.order("created_at DESC").first
 
     if !title.nil? && Settings.live_url.nil?
