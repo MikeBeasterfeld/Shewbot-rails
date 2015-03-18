@@ -4,7 +4,8 @@ class StaticPagesController < ApplicationController
   def home
   	current_show = Show.current_show
   	if current_show
-  		@current_show_title = current_show.title
+      @current_show_title = current_show.title
+      @current_show_art = current_show.art
   	else
   		@current_show_title = "No shows yet"
   	end

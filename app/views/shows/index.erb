@@ -5,6 +5,7 @@
     <th>Title</th>
     <th>Episode Number</th>
     <th>Title Count</th>
+    <th>Art</th>
     <th>Date</th>
   </tr>
 
@@ -13,6 +14,7 @@
     <td><%= link_to show.title, show_path(show) %></td>
     <td><%= show.episode_number %></td>
     <td><%= show.titles_count %></td>
+    <td><%= show.art %></td>
     <td><%= show.created_at.to_formatted_s(:long) %></td>
   </tr>
 <% end %>

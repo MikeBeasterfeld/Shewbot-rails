@@ -13,7 +13,7 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    question = Show.update_current_show(fetch_live_show_title).questions.new(question: params[:question])
+    question = Show.update_current_show(fetch_live_show).questions.new(question: params[:question])
 
     question.irc_user = IrcUser.find_or_create_by_name(params[:user])
 

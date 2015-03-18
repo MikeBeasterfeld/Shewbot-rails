@@ -27,16 +27,18 @@ class TitlesController < ApplicationController
   end
 
   def create
-    title = Show.update_current_show(fetch_live_show_title).titles.new(title: params[:title])
+    title = Show.update_current_show(fetch_live_show).titles.new(title: params[:title])
 
   	title.irc_user = IrcUser.find_or_create_by_name(params[:user])
 
+    what_is_live = fetch_live_show
+
     if title.show_id.nil?
-      render json: { 'Show' => [ 'is not live' ]}, status: :unprocessable_entity
+      render json: { 'Show' => [ 'is not live' ], 'live' => what_is_live }, status: :unprocessable_entity
     elsif title.save
       render json: title, status: :created
     else
-      render json: title.errors, status: :unprocessable_entity
+      render json: { 'errors' => title.errors }, status: :unprocessable_entity
     end
   end
 

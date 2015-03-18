@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150202060446) do
+ActiveRecord::Schema.define(:version => 20150317135203) do
 
   create_table "apis", :force => true do |t|
     t.string   "name"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20150202060446) do
     t.datetime "updated_at",     :null => false
     t.integer  "titles_count"
     t.integer  "episode_number"
+    t.string   "art"
   end
 
   create_table "titles", :force => true do |t|

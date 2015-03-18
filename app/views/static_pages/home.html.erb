@@ -30,7 +30,14 @@
 
 <div class="row">
 	<div class="col-md-3">
-		<h2 id="currentshowtitle"><%= @current_show_title %></h2>
+    <h2 id="currentshowart">
+      <%- if !@current_show_title.nil? %>
+        <%= image_tag(@current_show_art, :width => 200, :height => 200) %>
+      <%- end %>
+    </h2>
+
+ 		<h2 id="currentshowtitle"><%= @current_show_title %></h2>
+
 		<p>
 			<span id="viewers">1 person</span> viewing this page
 			<br/>
@@ -415,7 +422,13 @@
 		    '/shows/current',  
 		    {},  
 		    function(json) {  
-		        $("#currentshowtitle").html(json.title);
+            $("#currentshowtitle").html(json.title);
+            console.log(json);
+            if (json.art) {
+              $("#currentshowart").html('<img src="' + json.art + '" width="200" height="200">');
+            } else {
+              $("#currentshowart").html('');
+            }
 		    }  
 		);
     $.getJSON(  

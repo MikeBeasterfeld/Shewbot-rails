@@ -37,6 +37,8 @@ end
 group :test do
 	gem 'capybara', '1.1.2'
 	gem 'webmock'
+  gem 'factory_girl_rails'
+  gem 'faker'
 end
 
 group :herokuproduction do

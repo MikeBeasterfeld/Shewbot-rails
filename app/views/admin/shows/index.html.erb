@@ -4,6 +4,7 @@
   <tr>
     <th>Title</th>
     <th>Episode Number</th>
+    <th>Art</th>
     <th>Created at</th>
     <th>Updated at</th>
     <th></th>
@@ -15,6 +16,7 @@
   <tr>
     <td><%= show.title %></td>
     <td><%= show.episode_number %></td>
+    <td><%= image_tag(show.art, :width => 50, :height => 50) if !show.art.nil? %></td>
     <td><%= show.created_at %></td>
     <td><%= show.updated_at %></td>
     <td><%= link_to 'View Show', show_path(show) %></td>

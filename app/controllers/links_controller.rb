@@ -13,7 +13,7 @@ class LinksController < ApplicationController
   end
 
   def create
-    link = Show.update_current_show(fetch_live_show_title).links.new(url: params[:url])
+    link = Show.update_current_show(fetch_live_show).links.new(url: params[:url])
 
     link.irc_user = IrcUser.find_or_create_by_name(params[:user])
 

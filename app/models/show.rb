@@ -1,5 +1,5 @@
 class Show < ActiveRecord::Base
-  attr_accessible :title, :episode_number
+  attr_accessible :title, :episode_number, :art
 
   validates :title, presence: true
 
@@ -11,19 +11,19 @@ class Show < ActiveRecord::Base
   	self.order("created_at DESC").first
   end
 
-  def self.update_current_show(new_show)
+  def self.update_current_show(title = nil, art = nil)
     current_show = self.order("created_at DESC").first
 
-    if new_show.nil? && Settings.live_url.nil?
+    if !title.nil? && Settings.live_url.nil?
       return current_show
     end
 
-    if current_show.nil? || current_show.title != new_show || current_show.created_at < 4.hours.ago
+    if current_show.nil? || current_show.title != title || current_show.created_at < 4.hours.ago
     	self.transaction do 
     		current_show = self.order("created_at DESC").lock(true).first
 
-    		if current_show.nil? || current_show.title != new_show || current_show.created_at < 4.hours.ago
-    			current_show = self.create(title: new_show)
+    		if current_show.nil? || current_show.title != title || current_show.created_at < 4.hours.ago
+    			current_show = self.create(title: title, art: art)
     		end
     	end
     end

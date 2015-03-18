@@ -2,7 +2,9 @@ require 'spec_helper'
 
 describe Show do 
 
-	before { @show = Show.new(title: "Sample Show") }
+	before { 
+		@show = Show.new(title: "Sample Show")
+	}
 
 	subject { @show }
 
@@ -20,7 +22,8 @@ describe Show do
 	describe "new show" do 
 		before { 
 			@show.save 
-			@newshow = Show.update_current_show("This New Show")
+			@newshow = Show.update_current_show("This New Show", "http://example.com/cover_art.jpg")
+			puts @newshow.inspect
 			@newshow.save
 		}
 
@@ -32,7 +35,7 @@ describe Show do
 	describe "same show" do 
 		before { 
 			@show.save 
-			@newshow = Show.update_current_show("Sample Show")
+			@newshow = Show.update_current_show("Sample Show", "http://example.com/cover_art.jpg")
 			@newshow.save
 		}
 
