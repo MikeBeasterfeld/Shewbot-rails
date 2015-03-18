@@ -58,11 +58,8 @@
 
 		<%= yield %>
 
-		<%= debug(params) if Rails.env.development? %>
-    <%= debug(Settings) if Rails.env.development? %>
-		<%= debug(Cache.visitor_count) if Rails.env.development? %>
 		<footer> 
-			<p>Source code on <a href="https://github.com/holycow/shewbot-rails">Github</a>.</p>
+			<p>Showbot by <a href="http://twitter.com/mikebeasterfeld">Mike Beasterfeld</a>. Source code on <a href="https://github.com/MikeBeasterfeld/shewbot-rails">Github</a>.</p>
 		</footer>
 	</div>
 </body>
