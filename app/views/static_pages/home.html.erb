@@ -423,7 +423,6 @@
 		    {},  
 		    function(json) {  
             $("#currentshowtitle").html(json.title);
-            console.log(json);
             if (json.art) {
               $("#currentshowart").html('<img src="' + json.art + '" width="200" height="200">');
             } else {
