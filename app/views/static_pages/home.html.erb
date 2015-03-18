@@ -31,7 +31,7 @@
 <div class="row">
 	<div class="col-md-3">
     <h2 id="currentshowart">
-      <%- if !@current_show_art.nil? %>
+      <%- if !@current_show_art.nil? && !@current_show_art.empty? %>
         <%= image_tag(@current_show_art, :width => 200, :height => 200) %>
       <%- end %>
     </h2>
